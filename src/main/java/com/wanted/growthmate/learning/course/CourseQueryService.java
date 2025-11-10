@@ -3,6 +3,8 @@ package com.wanted.growthmate.learning.course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CourseQueryService {
 
@@ -27,5 +29,9 @@ public class CourseQueryService {
 
         courseRepository.save(newCourse);
         return new CourseDetailResponse(newCourse.getTitle(), newCourse.getDescription(), newCourse.getUserId(), newCourse.getPointAmount(), newCourse.getImageUrl());
+    }
+
+    public Optional<Course> getCourse(int courseId) {
+        return courseRepository.findById(courseId);
     }
 }
