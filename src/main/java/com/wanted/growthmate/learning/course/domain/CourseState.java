@@ -1,4 +1,4 @@
-package com.wanted.growthmate.learning.course;
+package com.wanted.growthmate.learning.course.domain;
 
 public enum CourseState {
     DRAFT, //임시저장

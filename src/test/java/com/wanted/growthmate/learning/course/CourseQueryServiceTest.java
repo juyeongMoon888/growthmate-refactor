@@ -1,6 +1,10 @@
 package com.wanted.growthmate.learning.course;
 
-import org.assertj.core.api.Assertions;
+import com.wanted.growthmate.learning.course.domain.Course;
+import com.wanted.growthmate.learning.course.dto.CourseCreateRequest;
+import com.wanted.growthmate.learning.course.dto.CourseDetailResponse;
+import com.wanted.growthmate.learning.course.dto.CourseEdit;
+import com.wanted.growthmate.learning.course.service.CourseQueryService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

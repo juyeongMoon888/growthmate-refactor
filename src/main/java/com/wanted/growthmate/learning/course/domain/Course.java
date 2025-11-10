@@ -1,4 +1,4 @@
-package com.wanted.growthmate.learning.course;
+package com.wanted.growthmate.learning.course.domain;
 
 import jakarta.persistence.*;
 
@@ -21,6 +21,7 @@ public class Course {
     private String imageUrl;
 
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Course() {}
 

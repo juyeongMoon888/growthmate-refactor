@@ -1,4 +1,4 @@
-package com.wanted.growthmate.learning.course;
+package com.wanted.growthmate.learning.course.dto;
 
 public class CourseDetailResponse {
     private String title;

@@ -1,5 +1,6 @@
-package com.wanted.growthmate.learning.course;
+package com.wanted.growthmate.learning.course.repository;
 
+import com.wanted.growthmate.learning.course.domain.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

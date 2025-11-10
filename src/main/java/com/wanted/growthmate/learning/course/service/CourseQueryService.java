@@ -1,5 +1,10 @@
-package com.wanted.growthmate.learning.course;
+package com.wanted.growthmate.learning.course.service;
 
+import com.wanted.growthmate.learning.course.repository.CourseRepository;
+import com.wanted.growthmate.learning.course.domain.CourseState;
+import com.wanted.growthmate.learning.course.domain.Course;
+import com.wanted.growthmate.learning.course.dto.CourseDetailResponse;
+import com.wanted.growthmate.learning.course.dto.CourseEdit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
