@@ -1,5 +1,8 @@
 package com.wanted.growthmate.learning.course.dto;
 
+import lombok.Builder;
+
+@Builder
 public class CourseCreateRequest {
     private String title;
     private int categoryId;

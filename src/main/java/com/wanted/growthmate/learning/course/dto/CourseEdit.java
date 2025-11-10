@@ -1,5 +1,8 @@
 package com.wanted.growthmate.learning.course.dto;
 
+import lombok.Builder;
+
+@Builder
 public class CourseEdit {
     private int userId;
     private String title; //변경이 없다면 기존과 같은값

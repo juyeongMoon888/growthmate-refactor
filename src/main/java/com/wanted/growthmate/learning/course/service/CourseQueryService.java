@@ -25,17 +25,15 @@ public class CourseQueryService {
 
     //TODO DTO로
     public CourseDetailResponse createCourse(int tutorId, int courseCategoryId, String courseTitle, String courseDescription, String courseImageUrl, int coursePointAmount) {
-
-        //TODO builder or 생성자로 넣기
-        Course newCourse = new Course();
-
-        newCourse.setUserId(tutorId);
-        newCourse.setCategoryId(courseCategoryId);
-        newCourse.setTitle(courseTitle);
-        newCourse.setDescription(courseDescription);
-        newCourse.setPointAmount(coursePointAmount);
-        newCourse.setCourseState(CourseState.DRAFT);
-        newCourse.setImageUrl(courseImageUrl);
+        Course newCourse = Course.builder()
+                .userId(tutorId)
+                .categoryId(courseCategoryId)
+                .title(courseTitle)
+                .description(courseDescription)
+                .pointAmount(coursePointAmount)
+                .courseState(CourseState.DRAFT)
+                .imageUrl(courseImageUrl)
+                .build();
 
         // TODO 엔터티를 response 타입으로 치환 해주는 로직 캡슐화에대해 고민해볼 ㄱ서
         courseRepository.save(newCourse);

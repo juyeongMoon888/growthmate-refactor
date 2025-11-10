@@ -1,9 +1,14 @@
 package com.wanted.growthmate.learning.course.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Builder
+@AllArgsConstructor //new Course가 완전히 없어지면 없애도됨
 @Entity
 @Table(name = "course")
 public class Course {
@@ -24,7 +29,6 @@ public class Course {
     private LocalDateTime updatedAt;
 
     public Course() {}
-
     public void setTitle(String title) {
         this.title = title;
     }
