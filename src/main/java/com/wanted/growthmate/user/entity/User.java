@@ -1,8 +1,8 @@
 package com.wanted.growthmate.user.entity;
 
 
+import com.wanted.growthmate.user.role.Role;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,21 +21,21 @@ public class User {
     @Column
     private String password;
 
-    @Column
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(name = "created_At")
     private LocalDateTime createdTime;
 
-    public User(String username, String email, String password, String role, LocalDateTime createTime) {
+    public User(String username, String email, String password, Role role, LocalDateTime createdTime) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.createdTime = createTime;
+        this.createdTime = createdTime;
     }
 
-    protected  User() {}
+    protected User() {}
 
     public long getId() {
         return id;
@@ -69,20 +69,20 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public LocalDateTime getCreateTime() {
+    public LocalDateTime getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createdTime = createTime;
+    public void setCreatedTime(LocalDateTime createdTime) {
+        this.createdTime = createdTime;
     }
 
     @Override

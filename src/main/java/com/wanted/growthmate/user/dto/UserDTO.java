@@ -1,5 +1,7 @@
 package com.wanted.growthmate.user.dto;
 
+import com.wanted.growthmate.user.entity.User;
+
 import java.time.LocalDateTime;
 
 public class UserDTO {
@@ -11,6 +13,13 @@ public class UserDTO {
     private LocalDateTime createdTime;
 
     protected UserDTO() {
+    }
+
+    public UserDTO(User user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.createdTime = user.getCreatedTime();
     }
 
     public String getUsername() {
@@ -25,8 +34,9 @@ public class UserDTO {
         return password;
     }
 
-    public void setPassword(String password) {
+    public String setPassword(String password) {
         this.password = password;
+        return password;
     }
 
     public String getEmail() {
