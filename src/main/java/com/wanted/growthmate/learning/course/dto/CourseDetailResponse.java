@@ -1,5 +1,7 @@
 package com.wanted.growthmate.learning.course.dto;
 
+import com.wanted.growthmate.learning.course.domain.Course;
+
 public class CourseDetailResponse {
     private String title;
     private String description;
@@ -7,12 +9,16 @@ public class CourseDetailResponse {
     private int pointAmount;
     private String imageUrl;
 
-    public CourseDetailResponse(String title, String description, int userId, int pointAmount, String imageUrl) {
-        this.title = title;
-        this.description = description;
-        this.userId = userId;
-        this.pointAmount = pointAmount;
-        this.imageUrl = imageUrl;
+    public CourseDetailResponse(Course course) {
+        this.title = course.getTitle();
+        this.description = course.getDescription();
+        this.userId = course.getUserId();
+        this.pointAmount = course.getPointAmount();
+        this.imageUrl = course.getImageUrl();
+    }
+
+    public static CourseDetailResponse from(Course course) {
+        return new CourseDetailResponse(course);
     }
 
     public String getTitle() {

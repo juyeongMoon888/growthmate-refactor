@@ -23,7 +23,6 @@ public class CourseQueryService {
         this.courseRepository = courseRepository;
     }
 
-    //TODO DTO로
     public CourseDetailResponse createCourse(int tutorId, int courseCategoryId, String courseTitle, String courseDescription, String courseImageUrl, int coursePointAmount) {
         Course newCourse = Course.builder()
                 .userId(tutorId)
@@ -35,9 +34,8 @@ public class CourseQueryService {
                 .imageUrl(courseImageUrl)
                 .build();
 
-        // TODO 엔터티를 response 타입으로 치환 해주는 로직 캡슐화에대해 고민해볼 ㄱ서
         courseRepository.save(newCourse);
-        return new CourseDetailResponse(newCourse.getTitle(), newCourse.getDescription(), newCourse.getUserId(), newCourse.getPointAmount(), newCourse.getImageUrl());
+        return CourseDetailResponse.from(newCourse);
     }
 
     public Optional<Course> getCourse(int courseId) {
@@ -48,14 +46,10 @@ public class CourseQueryService {
     public List<CourseDetailResponse> getCourses() {
         // TODO 소스 리팩터링
         List<CourseDetailResponse> res = new ArrayList<>();
+        List<Course> course = courseRepository.findAll();
         courseRepository.findAll().stream().forEach(course -> res.add(
                 // TODO 엔터티를 response 타입으로 치환 해주는 로직 캡슐화에대해 고민해볼 ㄱ서
-                new CourseDetailResponse(
-                        course.getTitle(),
-                        course.getDescription(),
-                        course.getUserId(),
-                        course.getPointAmount(),
-                        course.getImageUrl())
+                CourseDetailResponse.from(course)
         ));
         return res;
     }
@@ -73,7 +67,7 @@ public class CourseQueryService {
 
         courseRepository.save(course);
 
-        return new CourseDetailResponse(course.getTitle(), course.getDescription(), course.getUserId(), course.getPointAmount(), course.getImageUrl());
+        return CourseDetailResponse.from(course);
     }
 
     public void deleteCourse(int course_id) {
