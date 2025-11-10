@@ -1,6 +1,7 @@
 package com.wanted.growthmate.user.dto;
 
 import com.wanted.growthmate.user.entity.User;
+import jakarta.validation.constraints.Email;
 
 import java.time.LocalDateTime;
 
@@ -12,14 +13,19 @@ public class UserDTO {
     private String email;
     private LocalDateTime createdTime;
 
-    protected UserDTO() {
+    public UserDTO() {
     }
 
     public UserDTO(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
+        this.password = user.getPassword();
         this.email = user.getEmail();
         this.createdTime = user.getCreatedTime();
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getUsername() {

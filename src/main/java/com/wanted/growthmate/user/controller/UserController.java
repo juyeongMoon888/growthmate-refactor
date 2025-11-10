@@ -6,10 +6,7 @@ import com.wanted.growthmate.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
@@ -29,5 +26,30 @@ public class UserController {
 
         return ResponseEntity.ok(createdDTO);
     }
+
+    @GetMapping("/{id}")
+    public UserDTO findUserByIds(@PathVariable ("id") Long id){
+
+        return  userService.findUserById(id);
+    }
+
+    @PatchMapping("{id}")
+    public ResponseEntity<UserDTO> updateUser(
+            @PathVariable ("id") Long id
+            ,@RequestBody UserDTO userDTO) {
+
+        UserDTO updatedDTO = userService.updateUser(id, userDTO);
+
+        return ResponseEntity.ok(updatedDTO);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<UserDTO> deleteUser(@PathVariable ("id") Long id){
+
+        userService.deleteById(id);
+
+        return ResponseEntity.ok().build();
+    }
+
 
 }

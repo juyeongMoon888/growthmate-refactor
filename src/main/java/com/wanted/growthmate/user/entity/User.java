@@ -35,7 +35,7 @@ public class User {
         this.createdTime = createdTime;
     }
 
-    protected User() {}
+    public User() {}
 
     public long getId() {
         return id;
