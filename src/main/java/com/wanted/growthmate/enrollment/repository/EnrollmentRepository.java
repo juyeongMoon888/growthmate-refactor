@@ -1,7 +1,7 @@
 package com.wanted.growthmate.enrollment.repository;
 
-import com.wanted.growthmate.enrollment.dto.EnrollmentResponse;
 import com.wanted.growthmate.enrollment.entity.Enrollment;
+import com.wanted.growthmate.enrollment.entity.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +15,9 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
     Optional<Enrollment> findByUserIdAndCourseId(Long userId, Long courseId);
 
     // userId로 수강중인 강좌 리스트 확인
-    List<Enrollment> findByUserId(Long userId);
+    List<Enrollment> findByUserIdAndStatus(Long userId, Status status);
+
+    // orderNum 자동 증가를 위한 메서드
+    Enrollment findTopByUserIdOrderByOrderNumDesc(Long userId);
+
 }

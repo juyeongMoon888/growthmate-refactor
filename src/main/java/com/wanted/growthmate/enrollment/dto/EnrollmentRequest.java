@@ -10,9 +10,6 @@ public class EnrollmentRequest {
     @NotNull(message = "courseId는 반드시 필요합니다.")
     private Long courseId;
 
-    public EnrollmentRequest() {
-    }
-
     public EnrollmentRequest(Long userId, Long courseId) {
         this.userId = userId;
         this.courseId = courseId;

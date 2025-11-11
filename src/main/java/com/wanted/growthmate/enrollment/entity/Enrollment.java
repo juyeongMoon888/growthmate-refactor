@@ -21,6 +21,9 @@ public class Enrollment {
     @Column(name = "course_id", nullable = false)
     private Long courseId;
 
+    @Column(name = "order_num")
+    private int orderNum;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "enrollment_status", nullable = false)
     private Status status = Status.ACTIVE;
@@ -109,5 +112,13 @@ public class Enrollment {
 
     public void setProgress(Progress progress) {
         this.progress = progress;
+    }
+
+    public int getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(int orderNum) {
+        this.orderNum = orderNum;
     }
 }

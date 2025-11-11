@@ -30,13 +30,18 @@ public class EnrollmentService {
 
     // 수강 목록 생성 (강좌 조회 및 결제와 동시에 수강 목록 생성)
     public Enrollment createEnrollment(@Valid EnrollmentRequest request) {
+        Enrollment lastEnrollment = enrollmentRepository.findTopByUserIdOrderByOrderNumDesc(request.getUserId());
+        int newOrderNum = (lastEnrollment != null) ? lastEnrollment.getOrderNum() + 1 : 1;
+
         Enrollment enrollment = new Enrollment(request.getUserId(), request.getCourseId());
+        enrollment.setOrderNum(newOrderNum);
+
         return enrollmentRepository.save(enrollment);
     }
 
     // userId로 수강중인 목록 조회
     public List<Enrollment> findEnrollmentByUserId(@Valid EnrollmentSearchRequest request) {
-        return enrollmentRepository.findByUserId(request.getUserId());
+        return enrollmentRepository.findByUserIdAndStatus(request.getUserId(),request.getStatus());
     }
 
     // userId, courseId로 수강 중인 강좌 단일 조회

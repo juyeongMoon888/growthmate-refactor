@@ -9,8 +9,7 @@ public class EnrollmentResponse {
     private Long courseId;
     private String status;
     private String progress;
-
-    public EnrollmentResponse() {}
+    private int orderNum;
 
     public EnrollmentResponse(Enrollment e) {
         this.id = e.getId();
@@ -18,6 +17,7 @@ public class EnrollmentResponse {
         this.courseId = e.getCourseId();
         this.status = e.getStatus().name();
         this.progress = e.getProgress().name();
+        this.orderNum = e.getOrderNum();
     }
 
     public Long getId() {
@@ -38,5 +38,9 @@ public class EnrollmentResponse {
 
     public String getProgress() {
         return progress;
+    }
+
+    public int getOrderNum() {
+        return orderNum;
     }
 }
