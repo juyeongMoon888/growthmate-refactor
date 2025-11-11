@@ -4,10 +4,10 @@ import com.wanted.growthmate.category.dto.CategoryResponse;
 import com.wanted.growthmate.category.repository.CategoryRepository;
 import com.wanted.growthmate.learning.course.exception.CourseNotFound;
 import com.wanted.growthmate.learning.course.repository.CourseRepository;
-import com.wanted.growthmate.learning.course.domain.CourseState;
-import com.wanted.growthmate.learning.course.domain.Course;
-import com.wanted.growthmate.learning.course.dto.CourseDetailResponse;
-import com.wanted.growthmate.learning.course.domain.CourseEdit;
+import com.wanted.growthmate.learning.course.domain.model.CourseState;
+import com.wanted.growthmate.learning.course.domain.entity.Course;
+import com.wanted.growthmate.learning.course.domain.dto.CourseDetailResponse;
+import com.wanted.growthmate.learning.course.domain.model.CourseEdit;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
