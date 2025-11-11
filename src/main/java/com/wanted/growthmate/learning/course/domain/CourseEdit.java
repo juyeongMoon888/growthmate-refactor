@@ -1,4 +1,4 @@
-package com.wanted.growthmate.learning.course.dto;
+package com.wanted.growthmate.learning.course.domain;
 
 import lombok.Builder;
 
