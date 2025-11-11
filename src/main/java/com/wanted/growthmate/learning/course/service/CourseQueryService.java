@@ -5,11 +5,10 @@ import com.wanted.growthmate.learning.course.repository.CourseRepository;
 import com.wanted.growthmate.learning.course.domain.CourseState;
 import com.wanted.growthmate.learning.course.domain.Course;
 import com.wanted.growthmate.learning.course.dto.CourseDetailResponse;
-import com.wanted.growthmate.learning.course.dto.CourseEdit;
+import com.wanted.growthmate.learning.course.domain.CourseEdit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,14 +48,11 @@ public class CourseQueryService {
                 .toList();
     }
 
-    public CourseDetailResponse update(int course_id, CourseEdit courseEdit) throws IllegalAccessException {
+    public CourseDetailResponse update(int course_id, CourseEdit courseEdit) {
         Course course = courseRepository.findById(course_id)
                 .orElseThrow(() -> new CourseNotFound("Course not found with id: " + course_id));
 
-        course.setTitle(courseEdit.getTitle());
-        course.setDescription(courseEdit.getDescription());
-        course.setPointAmount(courseEdit.getPointAmount());
-        course.setImageUrl(courseEdit.getImageUrl());
+        course.editCourse(courseEdit);
 
         courseRepository.save(course);
         return CourseDetailResponse.from(course);
