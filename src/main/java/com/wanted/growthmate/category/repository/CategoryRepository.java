@@ -1,6 +1,6 @@
 package com.wanted.growthmate.category.repository;
 
-import com.wanted.growthmate.category.domain.Category;
+import com.wanted.growthmate.category.domain.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
