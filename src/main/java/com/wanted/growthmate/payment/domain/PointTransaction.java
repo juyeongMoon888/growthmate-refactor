@@ -1,5 +1,6 @@
 package com.wanted.growthmate.payment.domain;
 
+import com.wanted.growthmate.payment.domain.enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.Comment;
