@@ -25,7 +25,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr th:each="point : ${pointHistory}">
+  <tr th:each="point : ${pointTransactions}">
     <td th:text="${point.date}">2025-01-01</td>
     <td th:text="${point.description}">포인트 적립</td>
     <td th:text="${point.amount}">1000</td>
