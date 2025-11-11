@@ -98,8 +98,6 @@ class CourseQueryServiceTest {
         courseQueryService.createCourse(dto.getUserId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
 
         CourseEdit courseEdit = CourseEdit.builder()
-                .userId(1)// 강사ID
-                .categoryId(1)
                 .title("강좌 수정")
                 .description("강좌 설명")
                 .imageUrl("이미지url")
