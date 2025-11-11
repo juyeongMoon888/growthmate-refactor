@@ -8,7 +8,6 @@ import com.wanted.growthmate.learning.course.domain.CourseState;
 import com.wanted.growthmate.learning.course.domain.Course;
 import com.wanted.growthmate.learning.course.dto.CourseDetailResponse;
 import com.wanted.growthmate.learning.course.domain.CourseEdit;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
