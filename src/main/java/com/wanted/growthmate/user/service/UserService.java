@@ -22,11 +22,6 @@ public class UserService {
     private final PasswordEncoder encoder;
     private final UserRepository userRepository;
 
-    @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder encoder) {
-        this.userRepository = userRepository;
-        this.encoder = encoder;
-    }
     //로그인 메서드
     public UserDTO login(UserDTO loginRequest){
 
