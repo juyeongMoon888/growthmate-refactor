@@ -8,6 +8,8 @@ public class CourseDetailResponse {
     private int userId; // 강사ID
     private int pointAmount;
     private String imageUrl;
+    private int id;
+    private int categoryId;
 
     public CourseDetailResponse(Course course) {
         this.title = course.getTitle();
@@ -15,10 +17,20 @@ public class CourseDetailResponse {
         this.userId = course.getUserId();
         this.pointAmount = course.getPointAmount();
         this.imageUrl = course.getImageUrl();
+        this.id = course.getId();
+        this.categoryId = course.getCategoryId();
     }
 
     public static CourseDetailResponse from(Course course) {
         return new CourseDetailResponse(course);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
     }
 
     public String getTitle() {
