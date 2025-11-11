@@ -1,6 +1,6 @@
 package com.wanted.growthmate.category.dto;
 
-import com.wanted.growthmate.category.domain.Category;
+import com.wanted.growthmate.category.domain.entity.Category;
 
 public class CategoryResponse {
     private Long id; //선택을 위해 필요함
