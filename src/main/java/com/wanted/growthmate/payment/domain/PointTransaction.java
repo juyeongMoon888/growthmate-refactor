@@ -2,14 +2,14 @@ package com.wanted.growthmate.payment.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
-@Getter
-@NoArgsConstructor
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name="dtype")
 @Table(name = "point_transactions")
 @Comment("포인트 거래 내역 - 모든 포인트 변동 이력 추적 (감사 추적용)")
+@Getter
 public class PointTransaction {
 
     @Id
@@ -18,8 +18,7 @@ public class PointTransaction {
     @Comment("포인트 거래 고유 ID")
     private Long id;
 
-    // TODO: Point랑 User 중 어디랑 연결되는가? 둘 다?
-    // TODO: Point랑만 연결되면 User는 간접적으로 알 수 있음
+    // TODO: Point랑 User 중 어디랑 연결되는가? 둘 다? Point랑만 연결되면 User는 간접적으로 알 수 있지 않나??
     //@ManyToOne(fetch = FetchType.LAZY)
     //@JoinColumn(name = "user_id", nullable = false)
     //@Comment("사용자 ID")
@@ -30,15 +29,15 @@ public class PointTransaction {
     @Comment("포인트")
     private Point point; // 어느 원장의 거래인지
 
-    // TODO: 나중에 주석해제
+    // FIXME: Enrollment랑 직접 연결하지 않고, EnrollmentTransaction 통해서 연결
     //@ManyToOne(fetch = FetchType.LAZY)
     //@JoinColumn(name = "enrollment_id", nullable = true)
     //@Comment("수강 ID")
     //private Enrollment enrollment;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type", nullable = false)
     @Comment("거래 유형")
-    @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
 
     @Column(name = "amount", nullable = false)
@@ -53,14 +52,5 @@ public class PointTransaction {
     @Comment("거래 설명")
     private String description;
 
-    @Override
-    public String toString() {
-        return "Point{" +
-                "id=" + id +
-                //", user=" + user +
-                //", enrollment=" + enrollment +
-                ", amount=" + amount +
-                ", transactionType=" + transactionType +
-                '}';
-    }
+    protected PointTransaction() {}
 }
