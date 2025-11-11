@@ -1,5 +1,6 @@
 package com.wanted.growthmate.learning.course.service;
 
+import com.wanted.growthmate.learning.course.exception.CourseNotFound;
 import com.wanted.growthmate.learning.course.repository.CourseRepository;
 import com.wanted.growthmate.learning.course.domain.CourseState;
 import com.wanted.growthmate.learning.course.domain.Course;
@@ -56,17 +57,14 @@ public class CourseQueryService {
 
     public CourseDetailResponse update(int course_id, CourseEdit courseEdit) throws IllegalAccessException {
         Course course = courseRepository.findById(course_id)
-                .orElseThrow(() -> new IllegalAccessException("Course not found with id: " + course_id));
+                .orElseThrow(() -> new CourseNotFound("Course not found with id: " + course_id));
 
         course.setTitle(courseEdit.getTitle());
         course.setDescription(courseEdit.getDescription());
-        course.setCategoryId(courseEdit.getCategoryId());
-        course.setUserId(courseEdit.getUserId());
         course.setPointAmount(courseEdit.getPointAmount());
         course.setImageUrl(courseEdit.getImageUrl());
 
         courseRepository.save(course);
-
         return CourseDetailResponse.from(course);
     }
 
