@@ -21,4 +21,16 @@ public class Point {
     private Integer balance;
 
     protected Point() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Integer getBalance() {
+        return balance;
+    }
 }
