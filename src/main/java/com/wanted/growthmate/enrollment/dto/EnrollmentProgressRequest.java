@@ -3,7 +3,7 @@ package com.wanted.growthmate.enrollment.dto;
 import com.wanted.growthmate.enrollment.entity.Progress;
 import jakarta.validation.constraints.NotNull;
 
-public class EnrollmentUpdateRequest {
+public class EnrollmentProgressRequest {
 
     @NotNull(message = "userId 값이 비어있습니다.")
     private Long userId;
@@ -12,9 +12,7 @@ public class EnrollmentUpdateRequest {
     @NotNull(message = "진행률 값이 비어있습니다.")
     private Progress progress;
 
-    public EnrollmentUpdateRequest() {}
-
-    public EnrollmentUpdateRequest(Long userId, Long courseId, Progress progress) {
+    public EnrollmentProgressRequest(Long userId, Long courseId, Progress progress) {
         this.userId = userId;
         this.courseId = courseId;
         this.progress = progress;

@@ -74,7 +74,7 @@ public class EnrollmentService {
     }
 
     @Transactional
-    public EnrollmentResponse updateEnrollmentProgress(EnrollmentUpdateRequest request) {
+    public EnrollmentResponse updateEnrollmentProgress(EnrollmentProgressRequest request) {
         Enrollment enrollment = enrollmentRepository.findByUserIdAndCourseId(
                 // 강좌 확인
                 request.getUserId(), request.getCourseId())
@@ -88,7 +88,7 @@ public class EnrollmentService {
     }
 
 
-    public void deleteEnrollment(EnrollmentRequest request) {
+    public EnrollmentResponse deleteEnrollment(EnrollmentStatusRequest request) {
         Enrollment enrollment = enrollmentRepository.findByUserIdAndCourseId(
                 // 강좌 확인
                 request.getUserId(), request.getCourseId())
@@ -99,9 +99,9 @@ public class EnrollmentService {
             throw new IllegalStateException("수강을 시작한 강좌는 환불이 불가 합니다.");
         }
         // 상태와 삭제 일시 삽입 후 저장
-        enrollment.setStatus(Status.REFUNDED);
         enrollment.setDeletedAt(LocalDateTime.now());
         enrollmentRepository.save(enrollment);
+        return new EnrollmentResponse(enrollment);
     }
 
 }

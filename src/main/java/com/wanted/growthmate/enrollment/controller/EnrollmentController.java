@@ -13,15 +13,11 @@ import java.util.stream.Collectors;
 @RestController
 public class EnrollmentController {
 
-    private final EnrollmentService enrollmentService;
-
     @Autowired
-    public EnrollmentController(EnrollmentService enrollmentService) {
-        this.enrollmentService = enrollmentService;
-    }
+    private EnrollmentService enrollmentService;
 
     // 수강 목록 생성
-    @PostMapping
+    @PostMapping            //TODO : @Valid,
     public Enrollment createEnrollment(@RequestBody @Valid EnrollmentRequest request) {
         return enrollmentService.createEnrollment(request);
     }
@@ -49,14 +45,14 @@ public class EnrollmentController {
 
     // 강좌의 진도율을 변경 (Progress)
     @PatchMapping("/progress")
-    public EnrollmentResponse updateEnrollmentProgress(@RequestBody @Valid EnrollmentUpdateRequest request) {
+    public EnrollmentResponse updateEnrollmentProgress(@RequestBody @Valid EnrollmentProgressRequest request) {
         return enrollmentService.updateEnrollmentProgress(request);
     }
 
     // userId, courseId로 조회 후
     @DeleteMapping("/delete")
-    public String deleteEnrollment(@RequestBody @Valid EnrollmentRequest request) {
+    public EnrollmentResponse deleteEnrollment(@RequestBody @Valid EnrollmentStatusRequest request) {
         enrollmentService.deleteEnrollment(request);
-        return "Success";
+        return enrollmentService.updateEnrollmentStatus(request);
     }
 }

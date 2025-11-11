@@ -12,8 +12,6 @@ public class EnrollmentStatusRequest {
     @NotNull(message = "변경할 상태 값이 비어있습니다.")
     private Status status;
 
-    public EnrollmentStatusRequest() {}
-
     public EnrollmentStatusRequest(Long userId, Long courseId, Status status) {
         this.userId = userId;
         this.courseId = courseId;
