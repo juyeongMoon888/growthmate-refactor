@@ -1,10 +1,10 @@
 package com.wanted.growthmate.learning.course;
 
 import com.wanted.growthmate.category.dto.CategoryResponse;
-import com.wanted.growthmate.learning.course.domain.Course;
-import com.wanted.growthmate.learning.course.dto.CourseCreateRequest;
-import com.wanted.growthmate.learning.course.dto.CourseDetailResponse;
-import com.wanted.growthmate.learning.course.domain.CourseEdit;
+import com.wanted.growthmate.learning.course.domain.entity.Course;
+import com.wanted.growthmate.learning.course.domain.dto.CourseCreateRequest;
+import com.wanted.growthmate.learning.course.domain.dto.CourseDetailResponse;
+import com.wanted.growthmate.learning.course.domain.model.CourseEdit;
 import com.wanted.growthmate.learning.course.service.CourseService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
