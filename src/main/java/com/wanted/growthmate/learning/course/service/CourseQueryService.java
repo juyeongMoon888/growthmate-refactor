@@ -43,16 +43,10 @@ public class CourseQueryService {
         return courseRepository.findById(courseId);
     }
 
-    //TODO:  바로 return, .map으로 변환하기
     public List<CourseDetailResponse> getCourses() {
-        // TODO 소스 리팩터링
-        List<CourseDetailResponse> res = new ArrayList<>();
-        List<Course> course = courseRepository.findAll();
-        courseRepository.findAll().stream().forEach(course -> res.add(
-                // TODO 엔터티를 response 타입으로 치환 해주는 로직 캡슐화에대해 고민해볼 ㄱ서
-                CourseDetailResponse.from(course)
-        ));
-        return res;
+        return courseRepository.findAll().stream()
+                .map(CourseDetailResponse::from)
+                .toList();
     }
 
     public CourseDetailResponse update(int course_id, CourseEdit courseEdit) throws IllegalAccessException {
