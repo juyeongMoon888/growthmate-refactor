@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 @SpringBootTest
-class LectureServiceTest {
+class LectureServiceImplTest {
 
     @Autowired
     LectureServiceImpl lectureService;
