@@ -3,8 +3,6 @@ package com.wanted.growthmate.learning.course.domain;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
 @Builder
@@ -83,5 +81,12 @@ public class Course {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public void editCourse(CourseEdit courseEdit) {
+        this.title = courseEdit.getTitle();
+        this.description = courseEdit.getDescription();
+        this.pointAmount = courseEdit.getPointAmount();
+        this.imageUrl = courseEdit.getImageUrl();
     }
 }
