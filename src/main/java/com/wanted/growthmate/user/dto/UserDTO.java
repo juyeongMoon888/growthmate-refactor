@@ -19,7 +19,6 @@ public class UserDTO {
     public UserDTO(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
-        this.password = user.getPassword();
         this.email = user.getEmail();
         this.createdTime = user.getCreatedTime();
     }
