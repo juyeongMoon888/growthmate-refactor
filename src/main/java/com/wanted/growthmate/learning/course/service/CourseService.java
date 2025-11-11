@@ -1,5 +1,7 @@
 package com.wanted.growthmate.learning.course.service;
 
+import com.wanted.growthmate.category.dto.CategoryResponse;
+import com.wanted.growthmate.category.repository.CategoryRepository;
 import com.wanted.growthmate.learning.course.exception.CourseNotFound;
 import com.wanted.growthmate.learning.course.repository.CourseRepository;
 import com.wanted.growthmate.learning.course.domain.CourseState;
@@ -13,14 +15,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CourseQueryService {
+public class CourseService {
 
-    //TODO 리팩터링하기 @Autowired가 있는데 왜 또 생성자가?
-    @Autowired
-    private CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
+    private final CategoryRepository categoryRepository;
 
-    public CourseQueryService(CourseRepository courseRepository) {
+    public CourseService(CourseRepository courseRepository, CategoryRepository categoryRepository) {
         this.courseRepository = courseRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     public CourseDetailResponse createCourse(int tutorId, int courseCategoryId, String courseTitle, String courseDescription, String courseImageUrl, int coursePointAmount) {
@@ -63,5 +65,11 @@ public class CourseQueryService {
         if (findCourse.isPresent()) {
             courseRepository.deleteById(course_id);
         }
+    }
+
+    public List<CategoryResponse> getAllCategories() {
+        return categoryRepository.findAll().stream()
+                .map(CategoryResponse::from)
+                .toList();
     }
 }
