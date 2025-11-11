@@ -1,6 +1,6 @@
-package com.wanted.growthmate.learning.course.dto;
+package com.wanted.growthmate.learning.course.domain.dto;
 
-import com.wanted.growthmate.learning.course.domain.Course;
+import com.wanted.growthmate.learning.course.domain.entity.Course;
 
 public class CourseDetailResponse {
     private String title;

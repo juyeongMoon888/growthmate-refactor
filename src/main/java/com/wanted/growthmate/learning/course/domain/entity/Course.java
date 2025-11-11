@@ -1,5 +1,7 @@
-package com.wanted.growthmate.learning.course.domain;
+package com.wanted.growthmate.learning.course.domain.entity;
 
+import com.wanted.growthmate.learning.course.domain.model.CourseEdit;
+import com.wanted.growthmate.learning.course.domain.model.CourseState;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

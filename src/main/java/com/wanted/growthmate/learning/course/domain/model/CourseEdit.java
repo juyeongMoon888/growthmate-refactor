@@ -1,13 +1,11 @@
-package com.wanted.growthmate.learning.course.dto;
+package com.wanted.growthmate.learning.course.domain.model;
 
 import lombok.Builder;
 
 @Builder
-public class CourseCreateRequest {
-    private String title;
-    private int categoryId;
+public class CourseEdit {
+    private String title; //변경이 없다면 기존과 같은값
     private String description;
-    private int userId; // 강사ID
     private int pointAmount;
     private String imageUrl;
 
@@ -15,16 +13,8 @@ public class CourseCreateRequest {
         this.title = title;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public void setPointAmount(int pointAmount) {
@@ -39,16 +29,8 @@ public class CourseCreateRequest {
         return title;
     }
 
-    public int getCategoryId() {
-        return categoryId;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public int getUserId() {
-        return userId;
     }
 
     public int getPointAmount() {
