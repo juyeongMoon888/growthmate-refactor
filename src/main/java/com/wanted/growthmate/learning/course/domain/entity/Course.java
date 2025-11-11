@@ -29,33 +29,6 @@ public class Course {
     private LocalDateTime updatedAt;
 
     public Course() {}
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public void setPointAmount(int pointAmount) {
-        this.pointAmount = pointAmount;
-    }
-
-    public void setCourseState(CourseState courseState) {
-        this.courseState = courseState;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 
     public String getTitle() {
         return title;
