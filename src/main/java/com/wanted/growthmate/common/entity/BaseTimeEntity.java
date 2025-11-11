@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-
 public abstract class BaseTimeEntity {
     @Comment("생성 일시")
     @CreatedDate
