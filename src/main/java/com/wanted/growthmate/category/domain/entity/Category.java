@@ -1,4 +1,4 @@
-package com.wanted.growthmate.category.domain;
+package com.wanted.growthmate.category.domain.entity;
 
 import jakarta.persistence.*;
 
