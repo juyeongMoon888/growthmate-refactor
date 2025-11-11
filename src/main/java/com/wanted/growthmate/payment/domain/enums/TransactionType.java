@@ -1,4 +1,4 @@
-package com.wanted.growthmate.payment.domain;
+package com.wanted.growthmate.payment.domain.enums;
 
 // NOTE: 도메인 로직에서 헷갈릴 수 있어서 양수(EARN), 음수(USE)를 Enum에서 구분하였습니다.
 public enum TransactionType {
