@@ -1,15 +1,17 @@
 package com.wanted.growthmate.learning.course.domain.dto;
 
 import com.wanted.growthmate.learning.course.domain.entity.Course;
+import lombok.Getter;
 
+@Getter
 public class CourseDetailResponse {
     private String title;
     private String description;
-    private int userId; // 강사ID
-    private int pointAmount;
+    private Long userId; // 강사ID
+    private Long pointAmount;
     private String imageUrl;
-    private int id;
-    private int categoryId;
+    private Long id;
+    private Long categoryId;
 
     public CourseDetailResponse(Course course) {
         this.title = course.getTitle();
@@ -23,33 +25,5 @@ public class CourseDetailResponse {
 
     public static CourseDetailResponse from(Course course) {
         return new CourseDetailResponse(course);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public int getPointAmount() {
-        return pointAmount;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
     }
 }

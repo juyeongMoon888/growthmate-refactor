@@ -5,8 +5,11 @@ import com.wanted.growthmate.learning.course.domain.model.CourseState;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 
+@Getter
 @Builder
 @AllArgsConstructor //new Course가 완전히 없어지면 없애도됨
 @Entity
@@ -14,22 +17,22 @@ import java.time.LocalDateTime;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String title;
 
     @Column(name = "category_id", nullable = false)
-    private int categoryId;
+    private Long categoryId;
 
     @Column(nullable = false)
     private String description;
 
     @Column(name = "user_id", nullable = false)
-    private int userId; // 강사ID
+    private Long userId; // 강사ID
 
     @Column(name = "point_amount", nullable = false)
-    private int pointAmount;
+    private Long pointAmount;
 
     @Column(name = "course_state", nullable = false)
     private CourseState courseState;
@@ -44,38 +47,6 @@ public class Course {
     private LocalDateTime updatedAt;
 
     public Course() {}
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public int getPointAmount() {
-        return pointAmount;
-    }
-
-    public CourseState getCourseState() {
-        return courseState;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
 
     public void editCourse(CourseEdit courseEdit) {
         if (courseEdit.getTitle() != null) {

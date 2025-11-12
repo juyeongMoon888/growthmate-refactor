@@ -1,37 +1,22 @@
 package com.wanted.growthmate.learning.course.domain.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter // 바인딩 위함
 @Builder
+@AllArgsConstructor // 테스트에서 필요함.
 public class CourseCreateRequest {
     private String title;
-    private int categoryId;
+    private Long categoryId;
     private String description;
-    private int userId; // 강사ID
-    private int pointAmount;
+    private Long userId; // 강사ID
+    private Long pointAmount;
     private String imageUrl;
 
-    public String getTitle() {
-        return title;
-    }
+    public CourseCreateRequest() {}
 
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public int getPointAmount() {
-        return pointAmount;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
 }
