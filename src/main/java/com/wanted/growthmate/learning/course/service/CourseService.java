@@ -25,7 +25,7 @@ public class CourseService {
         this.categoryRepository = categoryRepository;
     }
 
-    public CourseDetailResponse createCourse(int tutorId, int courseCategoryId, String courseTitle, String courseDescription, String courseImageUrl, int coursePointAmount) {
+    public CourseDetailResponse createCourse(Long tutorId, Long courseCategoryId, String courseTitle, String courseDescription, String courseImageUrl, Long coursePointAmount) {
         Course newCourse = Course.builder()
                 .userId(tutorId)
                 .categoryId(courseCategoryId)
