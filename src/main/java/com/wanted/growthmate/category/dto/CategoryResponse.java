@@ -14,4 +14,12 @@ public class CategoryResponse {
     public static CategoryResponse from (Category category) {
         return new CategoryResponse(category);
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
 }
