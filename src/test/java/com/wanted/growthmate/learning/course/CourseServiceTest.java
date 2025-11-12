@@ -24,12 +24,12 @@ class CourseServiceTest {
     @Test
     void 강좌_생성() throws Exception {
         CourseCreateRequest dto = CourseCreateRequest.builder()
-                .userId(1)// 강사ID
-                .categoryId(1)
+                .userId(1L)// 강사ID
+                .categoryId(1L)
                 .title("강좌 제목")
                 .description("강좌 설명")
                 .imageUrl("이미지url")
-                .pointAmount(200)// 200P
+                .pointAmount(200L)// 200P
                 .build();
 
         CourseDetailResponse savedCourse = courseService.createCourse(dto.getUserId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
@@ -39,12 +39,12 @@ class CourseServiceTest {
     @Test
     void 강좌_단일_조회() throws Exception {
         CourseCreateRequest dto = CourseCreateRequest.builder()
-                .userId(1)// 강사ID
-                .categoryId(1)
+                .userId(1L)// 강사ID
+                .categoryId(1L)
                 .title("강좌 제목")
                 .description("강좌 설명")
                 .imageUrl("이미지url")
-                .pointAmount(200)// 200P
+                .pointAmount(200L)// 200P
                 .build();
 
         courseService.createCourse(dto.getUserId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
@@ -59,23 +59,23 @@ class CourseServiceTest {
     @Test
     void 강좌_리스트_조회() throws Exception {
         CourseCreateRequest dto1 = CourseCreateRequest.builder()
-                .userId(1)// 강사ID
-                .categoryId(1)
+                .userId(1L)// 강사ID
+                .categoryId(1L)
                 .title("강좌 제목")
                 .description("강좌 설명")
                 .imageUrl("이미지url")
-                .pointAmount(200)// 200P
+                .pointAmount(200L)// 200P
                 .build();
 
         courseService.createCourse(dto1.getUserId(), dto1.getCategoryId(), dto1.getTitle(), dto1.getDescription(), dto1.getImageUrl(), dto1.getPointAmount());
 
         CourseCreateRequest dto2 = CourseCreateRequest.builder()
-                .userId(1)// 강사ID
-                .categoryId(1)
+                .userId(1L)// 강사ID
+                .categoryId(1L)
                 .title("강좌 제목2")
                 .description("강좌 설명2")
                 .imageUrl("이미지url2")
-                .pointAmount(200)// 200P
+                .pointAmount(200L)// 200P
                 .build();
 
         courseService.createCourse(dto2.getUserId(), dto2.getCategoryId(), dto2.getTitle(), dto2.getDescription(), dto2.getImageUrl(), dto2.getPointAmount());
@@ -88,12 +88,12 @@ class CourseServiceTest {
     @Test
     void 강좌_수정() throws Exception {
         CourseCreateRequest dto = CourseCreateRequest.builder()
-                .userId(1)// 강사ID
-                .categoryId(1)
+                .userId(1L)// 강사ID
+                .categoryId(1L)
                 .title("강좌 제목")
                 .description("강좌 설명")
                 .imageUrl("이미지url")
-                .pointAmount(200)// 200P
+                .pointAmount(200L)// 200P
                 .build();
 
         courseService.createCourse(dto.getUserId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
@@ -102,7 +102,7 @@ class CourseServiceTest {
                 .title("강좌 수정")
                 .description("강좌 설명")
                 .imageUrl("이미지url")
-                .pointAmount(200)// 200P
+                .pointAmount(200L)// 200P
                 .build();
 
         CourseDetailResponse updatedCourse = courseService.update(1, courseEdit);
@@ -112,12 +112,12 @@ class CourseServiceTest {
     @Test
     void 강좌_삭제() throws Exception {
         CourseCreateRequest dto = CourseCreateRequest.builder()
-                .userId(1)// 강사ID
-                .categoryId(1)
+                .userId(1L)// 강사ID
+                .categoryId(1L)
                 .title("강좌 제목")
                 .description("강좌 설명")
                 .imageUrl("이미지url")
-                .pointAmount(200)// 200P
+                .pointAmount(200L)// 200P
                 .build();
         courseService.createCourse(dto.getUserId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
 
