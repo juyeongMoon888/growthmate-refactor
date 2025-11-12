@@ -12,21 +12,22 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseTimeEntity {
+public abstract class BaseTimeEntity extends BaseEntity{
     @Comment("생성 일시")
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
-    protected LocalDateTime createAt;
+    protected LocalDateTime createdAt;
     @Comment("수정 일시")
     @LastModifiedDate
     @Column(name = "updated_at")
-    protected LocalDateTime updateAt;
+    protected LocalDateTime updatedAt;
 
-    public LocalDateTime getCreateAt() {
-        return createAt;
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public LocalDateTime getUpdateAt() {
-        return updateAt;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 }

@@ -7,7 +7,7 @@ import org.hibernate.annotations.Comment;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-public abstract class SoftDeleteBaseEntity extends BaseEntity {
+public abstract class SoftDeleteBaseEntity extends BaseTimeEntity {
 
     @Comment("삭제 일시")
     @Column(name = "deleted_at")
