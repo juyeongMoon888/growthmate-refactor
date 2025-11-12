@@ -1,10 +1,13 @@
 package com.wanted.growthmate.payment.controller;
 
 import com.wanted.growthmate.payment.domain.Point;
+import com.wanted.growthmate.payment.dto.PointChargeRequest;
 import com.wanted.growthmate.payment.service.PointService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -17,17 +20,17 @@ public class PointController {
     }
 
     @GetMapping
-    public String getPointTransactions(Model model){
-        // 임시 사용자 ID -> 어디서 받아와야 하나?
+    public String getPointTransactionsPage(Model model){
+        // TODO: 임시 사용자 ID -> @Login 으로 대체
         Long userId =  1L;
 
         // 포인트 잔액 조회
-//        Point point = pointService.getCurrentPoint(userId);
+        Point point = pointService.getOrCreatePoint(userId);
 
         // TODO: 포인트 내역 조회 -> service 호출 (충전 기능 구현 후 추가)
 
         // 모델에 데이터 전달
-//        model.addAttribute("currentPoints", point.getBalance());
+        model.addAttribute("currentPoints", point.getBalance());
         //model.addAttribute("pointTransactions", pointTransactions);
 
         // 페이지 렌더링
@@ -37,5 +40,16 @@ public class PointController {
     @GetMapping("/charge")
     public String chargePage(){
         return "points/charge";
+    }
+
+    @PostMapping("/charge")
+    public String chargePoints(@ModelAttribute PointChargeRequest dto, Model model) {
+        // TODO: 실제 로그인 사용자로 변경 예정
+        Long userId =  1L;
+
+        //pointService.chargePoints(userId, dto.getAmount(), dto.getPaymentMethod());
+
+        // 충전 완료 후 포인트 내역 페이지로 리다이렉트
+        return "redirect:/points";
     }
 }
