@@ -5,27 +5,19 @@ import com.wanted.growthmate.payment.repository.PointRepository;
 import com.wanted.growthmate.payment.repository.PointTransactionRepository;
 import com.wanted.growthmate.user.entity.User;
 import com.wanted.growthmate.user.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PointServiceImpl implements PointService {
 
     private final PointRepository pointRepository;
     private final PointTransactionRepository pointTransactionRepository;
     private final UserRepository userRepository;
-
-    public PointServiceImpl(
-            PointRepository pointRepository,
-            PointTransactionRepository pointTransactionRepository,
-            UserRepository userRepository
-    ) {
-        this.pointRepository = pointRepository;
-        this.pointTransactionRepository = pointTransactionRepository;
-        this.userRepository = userRepository;
-    }
 
     // TODO: 로그인한 사용자의 포인트 전체 내역 조회
     //List<PointTransaction> getPointTransactions(Long userId);
