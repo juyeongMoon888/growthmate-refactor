@@ -16,16 +16,31 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = false)
     private String title;
+
+    @Column(name = "category_id", nullable = false)
     private int categoryId;
+
+    @Column(nullable = false)
     private String description;
+
+    @Column(name = "user_id", nullable = false)
     private int userId; // 강사ID
+
+    @Column(name = "point_amount", nullable = false)
     private int pointAmount;
+
+    @Column(name = "course_state", nullable = false)
     private CourseState courseState;
 
+    @Column(name = "image_url", nullable = false)
     private String imageUrl;
 
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     public Course() {}
