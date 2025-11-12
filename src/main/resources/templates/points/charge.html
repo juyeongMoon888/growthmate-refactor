@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>포인트 충전</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>포인트 충전</h1>
+
+<form th:action="@{/points/recharge}" method="post">
+  <div>
+    <label>충전금액:</label>
+    <input type="number" name="amount" required> 원
+  </div>
+
+  <div>
+    <label>결제 수단:</label>
+    <input type="checkbox" name="paymentMethod" value="CARD"> 신용카드 일반결제
+  </div>
+
+  <div>
+    <p>유의사항:</p>
+    <ul>
+      <li>유의사항 1</li>
+      <li>유의사항 2</li>
+      <li>유의사항 3</li>
+    </ul>
+  </div>
+
+  <div>
+    <button type="submit">충전하기</button>
+  </div>
+</form>
+
+<a th:href="@{/points}">← 포인트 내역으로 돌아가기</a>
+</body>
+</html>
