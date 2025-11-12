@@ -63,9 +63,15 @@ public class Course {
     }
 
     public void editCourse(CourseEdit courseEdit) {
-        this.title = courseEdit.getTitle();
-        this.description = courseEdit.getDescription();
+        if (courseEdit.getTitle() != null) {
+            this.title = courseEdit.getTitle();
+        }
+        if (courseEdit.getDescription() != null) {
+            this.description = courseEdit.getDescription();
+        }
+        if (courseEdit.getImageUrl() != null) {
+            this.imageUrl = courseEdit.getImageUrl();
+        }
         this.pointAmount = courseEdit.getPointAmount();
-        this.imageUrl = courseEdit.getImageUrl();
     }
 }
