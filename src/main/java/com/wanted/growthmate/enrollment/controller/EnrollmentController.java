@@ -17,12 +17,12 @@ public class EnrollmentController {
     private EnrollmentService enrollmentService;
 
     // 수강 목록 생성
-    @PostMapping            //TODO : @Valid,
+    @PostMapping
     public Enrollment createEnrollment(@RequestBody @Valid EnrollmentRequest request) {
         return enrollmentService.createEnrollment(request);
     }
 
-    // 유저 id와 강좌 id로 단일 조회
+    // 유저 id와 강좌 id로 단일 조회 (사용 안함)
     @PostMapping("/detail")
     public EnrollmentResponse findEnrollmentByUserIdAndCourseId(@RequestBody @Valid EnrollmentRequest request) {
         return enrollmentService.findEnrollmentByUserIdAndCourseId(request);
