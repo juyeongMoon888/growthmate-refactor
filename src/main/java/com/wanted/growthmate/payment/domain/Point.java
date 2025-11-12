@@ -1,5 +1,6 @@
 package com.wanted.growthmate.payment.domain;
 
+import com.wanted.growthmate.user.entity.User;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Comment;
 
