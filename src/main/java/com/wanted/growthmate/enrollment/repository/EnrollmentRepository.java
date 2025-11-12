@@ -14,10 +14,10 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
     // 단일 강좌 조회 optional로 null 확인
     Optional<Enrollment> findByUserIdAndCourseId(Long userId, Long courseId);
 
-    // userId로 수강중인 강좌 리스트 확인
-    List<Enrollment> findByUserIdAndStatus(Long userId, Status status);
-
     // orderNum 자동 증가를 위한 메서드
     Enrollment findTopByUserIdOrderByOrderNumDesc(Long userId);
+
+    // 순서 정렬하여
+    List<Enrollment> findEnrollmentsByUserIdAndStatusOrderByOrderNumAsc(Long userId, Status status);
 
 }
