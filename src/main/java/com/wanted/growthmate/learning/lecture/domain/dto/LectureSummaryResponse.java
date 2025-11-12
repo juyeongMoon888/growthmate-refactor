@@ -13,6 +13,12 @@ public class LectureSummaryResponse {
     private String title;
     private Long duration;
     private Long mediaId;
+    private Integer order;
+    private boolean isVisible;
+
+    public boolean isVisible() {
+        return isVisible;
+    }
 
     public static LectureSummaryResponse from(Lecture lecture) {
         return LectureSummaryResponse.builder()
@@ -22,6 +28,8 @@ public class LectureSummaryResponse {
                 .title(lecture.getTitle())
                 .duration(lecture.getDuration())
                 .mediaId(lecture.getMediaId())
+                .order(lecture.getDisplayOrder())
+                .isVisible(lecture.isVisible())
                 .build();
     }
 

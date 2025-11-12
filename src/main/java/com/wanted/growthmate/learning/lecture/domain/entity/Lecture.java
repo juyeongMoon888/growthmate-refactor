@@ -1,20 +1,24 @@
 package com.wanted.growthmate.learning.lecture.domain.entity;
 
 import com.wanted.growthmate.common.entity.BaseEntity;
+import com.wanted.growthmate.common.entity.SoftDeleteBaseEntity;
+import com.wanted.growthmate.learning.lecture.domain.dto.LectureUpdateRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.hibernate.annotations.Comment;
 
-import java.util.Objects;
 
 @Entity
 @Table(name = "lecture")
 @Builder
 @AllArgsConstructor
-public class Lecture extends BaseEntity {
+public class Lecture extends SoftDeleteBaseEntity {
 
 //    @ManyToOne()
     @Getter
@@ -37,7 +41,7 @@ public class Lecture extends BaseEntity {
 
     @Getter
     @Column(nullable = false)
-    @Comment("강의 설명")
+    @Comment("강의 길이")
     private Long duration;
 
 //    @OneToMany()
@@ -72,6 +76,15 @@ public class Lecture extends BaseEntity {
         return isVisible;
     }
 
+
+    public void setDisplayOrder(int displayOrder) {
+        this.displayOrder = displayOrder;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
+    }
+
     @Override
     public String toString() {
         return "Lecture{" +
@@ -88,4 +101,13 @@ public class Lecture extends BaseEntity {
                 '}';
     }
 
+    public void updateInfo(LectureUpdateRequest lectureUpdateRequest) {
+        this.sectionId = lectureUpdateRequest.getSectionId();
+        this.title = lectureUpdateRequest.getTitle();
+        if (lectureUpdateRequest.getIsVisible() != null) {
+            this.isVisible = lectureUpdateRequest.getIsVisible();
+        }
+        this.duration = lectureUpdateRequest.getDuration();
+        this.mediaId = lectureUpdateRequest.getMediaId();
+    }
 }

@@ -30,7 +30,8 @@ public class LectureCreateRequest {
     @Positive(message = "mediaId는 1 이상의 정수여야 합니다.")
     private Long mediaId;
 
-    private boolean isVisible;
+    @Builder.Default
+    private boolean isVisible = true;
 
     public Lecture toEntity() {
         return Lecture.builder()
