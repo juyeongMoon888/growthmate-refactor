@@ -9,22 +9,6 @@ public class CourseEdit {
     private int pointAmount;
     private String imageUrl;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setPointAmount(int pointAmount) {
-        this.pointAmount = pointAmount;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public String getTitle() {
         return title;
     }
