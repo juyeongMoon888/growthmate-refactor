@@ -2,6 +2,7 @@ package com.wanted.growthmate.learning.course.service;
 
 import com.wanted.growthmate.category.dto.CategoryResponse;
 import com.wanted.growthmate.category.repository.CategoryRepository;
+import com.wanted.growthmate.learning.course.domain.dto.TutorCourseSummaryResponse;
 import com.wanted.growthmate.learning.course.exception.CourseNotFound;
 import com.wanted.growthmate.learning.course.repository.CourseRepository;
 import com.wanted.growthmate.learning.course.domain.model.CourseState;
@@ -69,6 +70,12 @@ public class CourseService {
     public List<CategoryResponse> getAllCategories() {
         return categoryRepository.findAll().stream()
                 .map(CategoryResponse::from)
+                .toList();
+    }
+
+    public List<TutorCourseSummaryResponse> getTutorCourses() {
+        return courseRepository.findAll().stream()
+                .map(TutorCourseSummaryResponse::from)
                 .toList();
     }
 }
