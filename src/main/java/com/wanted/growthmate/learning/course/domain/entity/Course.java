@@ -30,6 +30,10 @@ public class Course {
 
     public Course() {}
 
+    public int getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }
