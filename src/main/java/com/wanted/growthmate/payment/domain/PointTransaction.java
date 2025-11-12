@@ -1,5 +1,6 @@
 package com.wanted.growthmate.payment.domain;
 
+import com.wanted.growthmate.common.entity.BaseTimeEntity;
 import com.wanted.growthmate.payment.domain.enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -11,13 +12,13 @@ import org.hibernate.annotations.Comment;
 @Table(name = "point_transactions")
 @Comment("포인트 거래 내역 - 모든 포인트 변동 이력 추적 (감사 추적용)")
 @Getter
-public class PointTransaction {
+public abstract class PointTransaction extends BaseTimeEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "point_transaction_id")
-    @Comment("포인트 거래 고유 ID")
-    private Long id;
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Column(name = "point_transaction_id")
+    //@Comment("포인트 거래 고유 ID")
+    //private Long id;
 
     // TODO: Point랑 User 중 어디랑 연결되는가? 둘 다? Point랑만 연결되면 User는 간접적으로 알 수 있지 않나??
     //@ManyToOne(fetch = FetchType.LAZY)
