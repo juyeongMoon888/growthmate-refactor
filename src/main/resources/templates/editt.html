@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>강좌 순서 편집</title>
+</head>
+<body>
+<h1>내 강좌 편집</h1>
+<a href="/myc">← 돌아가기</a>
+<hr>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>순서</th>
+        <th>강좌명</th>
+        <th>액션</th>
+    </tr>
+    <tr th:each="enroll : ${enrollments}">
+        <td th:text="${enroll.orderNum}"></td>
+        <td th:text="${enroll.courseId}"></td>
+        <td>
+            <form th:action="@{/change-order}" method="post" style="display:inline;">
+                <input type="hidden" name="enrollmentId" th:value="${enroll.id}">
+                <input type="number" name="newOrderNum" placeholder="새 순서" min="1"
+                       th:attr="max=${#lists.size(enrollments)}">
+                <button type="submit">순서 변경</button>
+            </form>
+
+            <form th:action="@{/hide}" method="post" style="display:inline;">
+                <input type="hidden" name="enrollmentId" th:value="${enroll.id}">
+                <button type="submit">강좌 숨기기</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
