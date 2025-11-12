@@ -22,7 +22,7 @@ public class Enrollment {
     private Long courseId;
 
     @Column(name = "order_num")
-    private int orderNum;
+    private Long orderNum;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "enrollment_status", nullable = false)
@@ -62,24 +62,12 @@ public class Enrollment {
 
     public Long getId() { return id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public Long getCourseId() {
         return courseId;
-    }
-
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
     }
 
     public Status getStatus() {
@@ -106,19 +94,11 @@ public class Enrollment {
         this.deletedAt = deletedAt;
     }
 
-    public Progress getProgress() {
-        return progress;
-    }
+    public Progress getProgress() { return progress; }
 
-    public void setProgress(Progress progress) {
-        this.progress = progress;
-    }
+    public void setProgress(Progress progress) { this.progress = progress; }
 
-    public int getOrderNum() {
-        return orderNum;
-    }
+    public Long getOrderNum() { return orderNum; }
 
-    public void setOrderNum(int orderNum) {
-        this.orderNum = orderNum;
-    }
+    public void setOrderNum(Long orderNum) { this.orderNum = orderNum; }
 }
