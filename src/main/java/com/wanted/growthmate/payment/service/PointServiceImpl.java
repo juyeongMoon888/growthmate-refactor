@@ -25,10 +25,10 @@ public class PointServiceImpl implements PointService {
     //PointTransaction chargePoints(Long userId, int amount, PaymentMethod paymentMethod, PaymentType paymentType);
 
     // 로그인한 사용자의 현재 포인트 조회
-    public Point getCurrentPoint(Long userId) {
-        return pointRepository.findByUserId(userId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 사용자의 포인트 원장이 존재하지 않습니다."));
-    }
+//    public Point getCurrentPoint(Long userId) {
+//        return pointRepository.findByUserId(userId)
+//                .orElseThrow(() -> new IllegalArgumentException("해당 사용자의 포인트 원장이 존재하지 않습니다."));
+//    }
 
     // 사용자가 수강신청 시 포인트 차감
     //PointTransaction deductPointForEnrollment(Long userId, Long enrollmentId, int amount);

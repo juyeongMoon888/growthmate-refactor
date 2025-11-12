@@ -17,7 +17,7 @@ public interface PointService {
 
     // NOTE: 유저 도메인에서 사용해주세요 -------------------
     // 로그인한 사용자의 현재 포인트 조회
-    Point getCurrentPoint(Long userId);
+//    Point getCurrentPoint(Long userId);
     // ----------------------------------------------
 
     // NOTE: 수강 도메인에서 사용해주세요 -------------------

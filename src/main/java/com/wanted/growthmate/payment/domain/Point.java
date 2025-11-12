@@ -13,11 +13,14 @@ public class Point {
     @Column(name = "point_id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", unique = true)
-    private User user;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id", unique = true)
+//    private User user;
 
-    @Column(name = "balance", nullable = false, columnDefinition = "0")
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
+    @Column(name = "balance", nullable = false)
     @Comment("현재 포인트 잔액")
     private Integer balance;
 
@@ -27,9 +30,9 @@ public class Point {
         return id;
     }
 
-    public User getUser() {
-        return user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
 
     public Integer getBalance() {
         return balance;

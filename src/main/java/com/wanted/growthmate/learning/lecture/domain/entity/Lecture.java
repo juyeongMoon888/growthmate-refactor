@@ -96,8 +96,8 @@ public class Lecture extends SoftDeleteBaseEntity {
                 ", mediaId=" + mediaId +
                 ", displayOrder=" + displayOrder +
                 ", isVisible=" + isVisible +
-                ", createAt=" + createAt +
-                ", updateAt=" + updateAt +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 

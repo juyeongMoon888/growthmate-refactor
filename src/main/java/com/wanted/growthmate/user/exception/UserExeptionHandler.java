@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class UserExeptionHandler {
 
     @ExceptionHandler({IllegalArgumentException.class, UserWrongPasswordException.class})
     public ResponseEntity<String> handleLoginFailure(Exception ex) {

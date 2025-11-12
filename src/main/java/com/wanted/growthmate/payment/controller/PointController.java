@@ -22,12 +22,12 @@ public class PointController {
         Long userId =  1L;
 
         // 포인트 잔액 조회
-        Point point = pointService.getCurrentPoint(userId);
+//        Point point = pointService.getCurrentPoint(userId);
 
         // TODO: 포인트 내역 조회 -> service 호출 (충전 기능 구현 후 추가)
 
         // 모델에 데이터 전달
-        model.addAttribute("currentPoints", point.getBalance());
+//        model.addAttribute("currentPoints", point.getBalance());
         //model.addAttribute("pointTransactions", pointTransactions);
 
         // 페이지 렌더링
