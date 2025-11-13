@@ -2,7 +2,7 @@ package com.wanted.growthmate.enrollment.dto;
 
 import jakarta.validation.constraints.NotNull;
 
-public class EnrollmentRequest {
+public class EnrollmentCreateRequest {
 
     @NotNull(message = "userId는 반드시 필요합니다.")
     private Long userId;
@@ -10,7 +10,7 @@ public class EnrollmentRequest {
     @NotNull(message = "courseId는 반드시 필요합니다.")
     private Long courseId;
 
-    public EnrollmentRequest(Long userId, Long courseId) {
+    public EnrollmentCreateRequest(Long userId, Long courseId) {
         this.userId = userId;
         this.courseId = courseId;
     }

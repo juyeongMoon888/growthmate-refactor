@@ -13,8 +13,8 @@ public class EnrollmentResponse {
 
     public EnrollmentResponse(Enrollment e) {
         this.id = e.getId();
-        this.userId = e.getUserId();
-        this.courseId = e.getCourseId();
+        this.userId = e.getUser().getId();
+        this.courseId = e.getCourse().getId();
         this.status = e.getStatus().name();
         this.progress = e.getProgress().name();
         this.orderNum = e.getOrderNum();
