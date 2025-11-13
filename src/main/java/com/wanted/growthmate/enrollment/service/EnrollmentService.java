@@ -32,10 +32,10 @@ public class EnrollmentService {
         this.courseRepository = courseRepository;
     }
 
-//     수강 정보 전체 조회 (사용 계획 X)
-//    public List<Enrollment> findAllEnrollment() {
-//        return enrollmentRepository.findAll();
-//    }
+    // 수강 정보 전체 조회 (사용 계획 X)
+    public List<Enrollment> findAllEnrollment() {
+        return enrollmentRepository.findAll();
+    }
 
     // 수강 목록 생성 (강좌 조회 및 결제와 동시에 수강 목록 생성)
     @Transactional
@@ -57,14 +57,6 @@ public class EnrollmentService {
     public List<Enrollment> findEnrollmentByUserId(EnrollmentSearchRequest request) {
         return enrollmentRepository.findEnrollmentsByUserIdAndStatusOrderByOrderNumAsc(request.getUserId(),request.getStatus());
     }
-
-    // userId, courseId로 수강 중인 강좌 단일 조회 (사용 안함)
-//    @Transactional(readOnly = true)
-//    public Enrollment findEnrollmentByUserIdAndCourseId(EnrollmentRequest request) {
-//        return enrollmentRepository.findByUserIdAndCourseId(
-//                request.getUserId(), request.getCourseId())
-//                .orElseThrow(() -> new IllegalArgumentException("해당 수강 정보가 존재하지 않습니다."));
-//    }
 
     // 강좌의 상태를 변경 (ACTIVE, HIDDEN, REFUNDED)
     @Transactional
