@@ -2,7 +2,8 @@ package com.wanted.growthmate.learning.course.service;
 
 import com.wanted.growthmate.category.dto.CategoryResponse;
 import com.wanted.growthmate.category.repository.CategoryRepository;
-import com.wanted.growthmate.learning.course.domain.dto.TutorCourseSummaryResponse;
+import com.wanted.growthmate.learning.course.domain.dto.CourseEditRequest;
+import com.wanted.growthmate.learning.course.domain.dto.InstructorCourseSummaryResponse;
 import com.wanted.growthmate.learning.course.exception.CourseNotFound;
 import com.wanted.growthmate.learning.course.repository.CourseRepository;
 import com.wanted.growthmate.learning.course.domain.model.CourseState;
@@ -25,9 +26,9 @@ public class CourseService {
         this.categoryRepository = categoryRepository;
     }
 
-    public CourseDetailResponse createCourse(Long tutorId, Long courseCategoryId, String courseTitle, String courseDescription, String courseImageUrl, Long coursePointAmount) {
+    public CourseDetailResponse createCourse(Long instructorId, Long courseCategoryId, String courseTitle, String courseDescription, String courseImageUrl, Long coursePointAmount) {
         Course newCourse = Course.builder()
-                .userId(tutorId)
+                .userId(instructorId)
                 .categoryId(courseCategoryId)
                 .title(courseTitle)
                 .description(courseDescription)
@@ -40,7 +41,7 @@ public class CourseService {
         return CourseDetailResponse.from(newCourse);
     }
 
-    public Optional<Course> getCourse(int courseId) {
+    public Optional<Course> getCourse(Long courseId) {
         return courseRepository.findById(courseId);
     }
 
@@ -50,9 +51,9 @@ public class CourseService {
                 .toList();
     }
 
-    public CourseDetailResponse update(int course_id, CourseEdit courseEdit) {
-        Course course = courseRepository.findById(course_id)
-                .orElseThrow(() -> new CourseNotFound("Course not found with id: " + course_id));
+    public CourseDetailResponse update(Long courseId, CourseEdit courseEdit) {
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new CourseNotFound("Course not found with id: " + courseId));
 
         course.editCourse(courseEdit);
 
@@ -60,10 +61,10 @@ public class CourseService {
         return CourseDetailResponse.from(course);
     }
 
-    public void deleteCourse(int course_id) {
-        Optional<Course> findCourse = courseRepository.findById(course_id);
+    public void deleteCourse(Long courseId) {
+        Optional<Course> findCourse = courseRepository.findById(courseId);
         if (findCourse.isPresent()) {
-            courseRepository.deleteById(course_id);
+            courseRepository.deleteById(courseId);
         }
     }
 
@@ -73,9 +74,15 @@ public class CourseService {
                 .toList();
     }
 
-    public List<TutorCourseSummaryResponse> getTutorCourses() {
+    public List<InstructorCourseSummaryResponse> getInstructorCourses() {
         return courseRepository.findAll().stream()
-                .map(TutorCourseSummaryResponse::from)
+                .map(InstructorCourseSummaryResponse::from)
                 .toList();
+    }
+
+    public CourseEditRequest getCourseEditForm(Long courseId) {
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new CourseNotFound("Course not found with id: " + courseId));
+        return CourseEditRequest.from(course);
     }
 }
