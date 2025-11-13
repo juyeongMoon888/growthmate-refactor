@@ -6,12 +6,12 @@
 </head>
 <body>
 <h1 th:text="|${userId}님의 수강중인 강좌 목록|"></h1>
-<a href="/edit">[Edit]</a>
-<a href="/hidden">[숨김 강좌 보기]</a>
+<a href="/enrollment/edit">[Edit]</a>
+<a href="/enrollment/hiddenList">[숨김 강좌 보기]</a>
 
 <ul>
     <li th:each="enroll : ${enrollments}">
-        <span th:text="|(${enroll.orderNum}) ${enroll.course.id}|"></span>
+        <span th:text="|(${enroll.orderNum}) ${enroll.course.title}|"></span>
         <a th:href="@{|/courses/${enroll.course.id}|}">[선택]</a>    </li>
 </ul>
 
