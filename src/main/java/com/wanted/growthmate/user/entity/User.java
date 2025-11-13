@@ -3,9 +3,18 @@ package com.wanted.growthmate.user.entity;
 
 import com.wanted.growthmate.user.role.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
+
+@Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
@@ -13,37 +22,46 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+
     @Column(unique = true)
     private String username;
+
 
     @Column(unique = true)
     private String email;
 
+
     @Column
     private String password;
+
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(name = "created_At")
-    private LocalDateTime createdTime;
 
-    public User(String username, String email, String password, Role role, LocalDateTime createdTime) {
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+
+    @Column(name = "deleted_at")
+    private  LocalDateTime deletedAt;
+
+    public User(String username, String email, String password, Role role, LocalDateTime createdAt) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.createdTime = createdTime;
+        this.createdAt = LocalDateTime.now();
+
     }
 
-    public User() {}
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -78,13 +96,11 @@ public class User {
         this.role = role;
     }
 
-    public LocalDateTime getCreatedTime() {
-        return createdTime;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreatedTime(LocalDateTime createdTime) {
-        this.createdTime = createdTime;
-    }
+
 
     @Override
     public String toString() {
@@ -92,9 +108,20 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
-                ", createTime=" + createdTime +
+                ", createdAt=" + createdAt +
                 '}';
     }
+    public void updateEmail(String email) {
+        if (email != null && !email.isBlank()) {
+            this.email = email;
+        }
+    }
+
+    // 💡 [추가] 비밀번호 변경용 헬퍼 메소드
+    public void updatePassword(String newEncodedPassword) {
+        this.password = newEncodedPassword;
+    }
+
+
 }
