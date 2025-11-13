@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>포인트 내역</title>
-  <link rel="stylesheet" href="/css/style.css">
+<!--  <link rel="stylesheet" href="/css/style.css">-->
 </head>
 <body>
 <h1>포인트 내역</h1>
@@ -22,13 +22,15 @@
     <th>날짜</th>
     <th>설명</th>
     <th>금액</th>
+    <th>잔액</th>
   </tr>
   </thead>
   <tbody>
-  <tr th:each="point : ${pointTransactions}">
-    <td th:text="${point.date}">2025-01-01</td>
-    <td th:text="${point.description}">포인트 적립</td>
-    <td th:text="${point.amount}">1000</td>
+  <tr th:each="pointTransaction : ${pointTransactions}">
+    <td th:text="${pointTransaction.getCreatedAt()}"></td>
+    <td th:text="${pointTransaction.getDescription()}"></td>
+    <td th:text="${pointTransaction.getAmount()}"></td>
+    <td th:text="${pointTransaction.getBalanceAfter()}"></td>
   </tr>
   </tbody>
 </table>

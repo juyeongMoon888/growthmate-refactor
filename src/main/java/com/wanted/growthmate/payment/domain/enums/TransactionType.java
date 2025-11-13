@@ -1,6 +1,7 @@
 package com.wanted.growthmate.payment.domain.enums;
 
 // NOTE: 도메인 로직에서 헷갈릴 수 있어서 양수(EARN), 음수(USE)를 Enum에서 구분하였습니다.
+// TODO: 음수/양수를 enum에 값을 넣어서 구분할 수 있는지 확인 (+ DB에는 영향이 없는지)
 public enum TransactionType {
     // ------1차 구현 범위 ----------
     // 수강신청 시 학생 포인트 차감 (-)
