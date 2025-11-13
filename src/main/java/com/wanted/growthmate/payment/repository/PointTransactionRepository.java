@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public interface PointTransactionRepository extends JpaRepository<PointTransaction, Long> {
 
+    // TODO: 직접 쿼리를 만들지 않고 서비스 단에서 풀어볼 수 있는 방법 찾아보기
     @Query("SELECT new com.wanted.growthmate.payment.dto.PointTransactionSummary(" +
             "pt.createdAt, pt.description, pt.amount, pt.balanceAfter) " +
             "FROM PointTransaction pt " +
