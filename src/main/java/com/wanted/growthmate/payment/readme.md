@@ -15,8 +15,8 @@
 | 기능명 | 기능 설명 | 담당 계층 | 구분 | 완료 여부 |
 |:--:|:--:|:--:|:--:|:--:|
 | 엔티티 설계 | JPA 기반 엔티티 설계 및 연관관계 설정 | Entity |필수 인프라| ✅ |
-| 포인트 내역 조회 | 현재 포인트 및 포인트 사용/적립 내역 조회 페이지 | View, Controller, Service, Repository | 사용자 UI, 핵심 플로우 | ❌ |
-| 포인트 충전하기 | 포인트 충전하기 페이지| View, Controller, Service, Repository | 사용자 UI, 핵심 플로우 | ❌ |
+| 포인트 내역 조회 | 현재 포인트 및 포인트 사용/적립 내역 조회 페이지 | View, Controller, Service, Repository | 사용자 UI, 핵심 플로우 | ✅ |
+| 포인트 충전하기 | 포인트 충전하기 페이지| View, Controller, Service, Repository | 사용자 UI, 핵심 플로우 | ✅ |
 | 포인트 잔액 조회 API | `User` 도메인에서 사용자 포인트를 가져올 수 있는 API 제공 | Service, Repository | 도메인 연동 | ✅ |
 | 포인트 차감/적립 API | `Enrollment` 도메인에서 사용자 포인트를 차감 및 적립할 수 있는 API 제공| Service, Repository | 도메인 연동 | ❌ |
 | 예외 처리 | 포인트 부족 시  | Entity | 안정성 확보 | ❌ |
