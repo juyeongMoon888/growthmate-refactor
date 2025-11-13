@@ -6,13 +6,14 @@
 </head>
 <body>
 <h1 th:text="${userId} + '님의 숨김 강좌 목록'"></h1>
-<a href="/enrollments?userId=" th:href="@{'/enrollments?userId=' + ${userId}}">[수강중인 강좌 보기]</a>
+<a href="/myc">← 돌아가기</a>
 <hr>
 
 <ul>
     <li th:each="enroll : ${enrollments}">
-        <span th:text="${enroll.courseId}"></span>
-        <a th:href="@{'/courses/' + ${enroll.courseId}}">[강좌 선택]</a>
+        <!-- courseId 대신 course.title 또는 course.id 사용 -->
+        <span th:text="${enroll.course.title}"></span>
+        <a th:href="@{'/courses/' + ${enroll.course.id}}">[강좌 선택]</a>
 
         <!-- ✅ 복구 버튼 (POST 방식) -->
         <form th:action="@{/restore}" method="post" style="display:inline;">

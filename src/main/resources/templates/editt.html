@@ -17,18 +17,24 @@
     </tr>
     <tr th:each="enroll : ${enrollments}">
         <td th:text="${enroll.orderNum}"></td>
-        <td th:text="${enroll.courseId}"></td>
+        <!-- courseId 대신 course.title 또는 course.id 사용 -->
+        <td th:text="${enroll.course.title}"></td>
         <td>
             <form th:action="@{/change-order}" method="post" style="display:inline;">
                 <input type="hidden" name="enrollmentId" th:value="${enroll.id}">
                 <input type="number" name="newOrderNum" placeholder="새 순서" min="1"
-                       th:attr="max=${#lists.size(enrollments)}">
+                       th:max="${#lists.size(enrollments)}">
                 <button type="submit">순서 변경</button>
             </form>
 
             <form th:action="@{/hide}" method="post" style="display:inline;">
                 <input type="hidden" name="enrollmentId" th:value="${enroll.id}">
                 <button type="submit">강좌 숨기기</button>
+            </form>
+
+            <form th:action="@{/refund}" method="post" style="display:inline;">
+                <input type="hidden" name="enrollmentId" th:value="${enroll.id}">
+                <button type="submit">강좌 환불</button>
             </form>
         </td>
     </tr>
