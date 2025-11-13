@@ -2,7 +2,6 @@ package com.wanted.growthmate.payment.service;
 
 import com.wanted.growthmate.payment.domain.Point;
 import com.wanted.growthmate.payment.repository.PointRepository;
-import com.wanted.growthmate.payment.repository.PointTransactionRepository;
 import com.wanted.growthmate.user.entity.User;
 import com.wanted.growthmate.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,19 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+// TODO: 예외 처리 & 트랜잭션
 @Service
 @RequiredArgsConstructor
 public class PointServiceImpl implements PointService {
 
-    private final PointRepository pointRepository;
-    private final PointTransactionRepository pointTransactionRepository;
     private final UserRepository userRepository;
-
-    // TODO: 로그인한 사용자의 포인트 전체 내역 조회
-    //List<PointTransaction> getPointTransactions(Long userId);
-
-    // TODO: 결제하여 포인트 충전 시 포인트 적립
-    //PointTransaction chargePoints(Long userId, int amount, PaymentMethod paymentMethod, PaymentType paymentType);
+    private final PointRepository pointRepository;
 
     /*
      * 로그인한 사용자의 현재 포인트 조회

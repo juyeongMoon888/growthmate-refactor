@@ -1,14 +1,16 @@
 package com.wanted.growthmate.payment.controller;
 
 import com.wanted.growthmate.payment.domain.Point;
-import com.wanted.growthmate.payment.domain.PointTransaction;
 import com.wanted.growthmate.payment.dto.PointChargeRequest;
 import com.wanted.growthmate.payment.dto.PointTransactionSummary;
+import com.wanted.growthmate.payment.service.PaymentService;
 import com.wanted.growthmate.payment.service.PointService;
 import com.wanted.growthmate.payment.service.PointTransactionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +24,7 @@ import java.util.List;
 public class PointController {
     private final PointService pointService;
     private final PointTransactionService pointTransactionService;
+    private final PaymentService paymentService;
 
     @GetMapping
     public String getPointTransactionsPage(Model model){
@@ -43,18 +46,31 @@ public class PointController {
     }
 
     @GetMapping("/charge")
-    public String chargePage(){
+    public String chargePage(Model model){
+        model.addAttribute("reqBody", new PointChargeRequest());
         return "points/charge";
     }
 
     @PostMapping("/charge")
-    public String chargePoints(@ModelAttribute PointChargeRequest dto, Model model) {
-        // TODO: 실제 로그인 사용자로 변경 예정
+    public String chargePoints(
+            @Valid @ModelAttribute("reqBody") PointChargeRequest reqBody,
+            BindingResult bindingResult
+    ) {
+        // TODO: 임시 사용자 ID -> @Login 으로 대체
         Long userId =  1L;
 
-        //pointService.chargePoints(userId, dto.getAmount(), dto.getPaymentMethod());
+        System.out.println(reqBody.getAmount());
+        System.out.println(reqBody.getPaymentMethod());
 
-        // 충전 완료 후 포인트 내역 페이지로 리다이렉트
+        // 유효성 검사 실패 시 사용자가 입력하던 페이지로 복귀
+        if (bindingResult.hasErrors()) {
+            return "points/charge";
+        }
+
+        // 포인트 충전
+        paymentService.chargePoints(userId, reqBody);
+
+        // 성공 시 포인트 내역 페이지로 리다이렉트
         return "redirect:/points";
     }
 }

@@ -55,4 +55,18 @@ public abstract class PointTransaction extends BaseTimeEntity {
     private String description;
 
     protected PointTransaction() {}
+
+    protected void setPoint(Point point) {
+        this.point = point;
+    }
+
+    /*
+     * 공통 거래 초기화 로직
+     */
+    protected void recordTransaction(TransactionType transactionType, int amount, String description) {
+        this.transactionType = transactionType;
+        this.amount = amount;
+        this.balanceAfter = point.getBalance() + amount;
+        this.description = description;
+    }
 }

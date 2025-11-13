@@ -1,6 +1,7 @@
 package com.wanted.growthmate.payment.domain;
 
 import com.wanted.growthmate.common.entity.BaseTimeEntity;
+import com.wanted.growthmate.payment.exception.InvalidPointAmountException;
 import com.wanted.growthmate.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -30,4 +31,16 @@ public class Point extends BaseTimeEntity {
         this.user = user;
         this.balance = balance;
     }
+
+    /*
+     * 포인트 적립
+     */
+    public void addBalance(int amount) {
+        if (amount <= 0) {
+            throw new InvalidPointAmountException(amount);
+        }
+        this.balance += amount;
+    }
+
+    // TODO: 포인트 차감
 }
