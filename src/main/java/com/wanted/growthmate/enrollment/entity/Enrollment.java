@@ -1,6 +1,8 @@
 package com.wanted.growthmate.enrollment.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.wanted.growthmate.learning.course.domain.entity.Course;
+import com.wanted.growthmate.user.entity.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -13,13 +15,13 @@ public class Enrollment {
     @Column(name = "enrollment_id")
     private Long id;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id")
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @Column(name = "course_id", nullable = false)
-    private Long courseId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     @Column(name = "order_num")
     private Long orderNum;
@@ -37,13 +39,13 @@ public class Enrollment {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "progress", nullable = false)
-    private Progress progress;
+    private Progress progress = Progress.NOT_DONE;
 
     protected Enrollment() {}
 
-    public Enrollment(Long userId, Long courseId) {
-        this.userId = userId;
-        this.courseId = courseId;
+    public Enrollment(User user, Course course) {
+        this.user = user;
+        this.course = course;
     }
 
     // 데이터 저장 전 자동으로 생성일 세팅
@@ -53,7 +55,7 @@ public class Enrollment {
             this.createdAt = LocalDateTime.now();
         }
         if (this.progress == null) {
-            this.progress = Progress.FALSE;
+            this.progress = Progress.NOT_DONE;
         }
         if (this.status == null) {
             this.status = Status.ACTIVE;
@@ -62,12 +64,12 @@ public class Enrollment {
 
     public Long getId() { return id; }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public Long getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
     public Status getStatus() {

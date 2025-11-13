@@ -13,20 +13,24 @@ import java.util.stream.Collectors;
 @RestController
 public class EnrollmentController {
 
-    @Autowired
     private EnrollmentService enrollmentService;
 
+    @Autowired
+    public void setEnrollmentService(EnrollmentService enrollmentService) {
+        this.enrollmentService = enrollmentService;
+    }
+
     // 수강 목록 생성
-    @PostMapping
-    public Enrollment createEnrollment(@RequestBody @Valid EnrollmentRequest request) {
-        return enrollmentService.createEnrollment(request);
+    @PostMapping("/addEnrollment")
+    public EnrollmentResponse createEnrollment(@RequestBody @Valid EnrollmentCreateRequest request) {
+        return new EnrollmentResponse(enrollmentService.createEnrollment(request));
     }
 
     // 유저 id와 강좌 id로 단일 조회 (사용 안함)
-    @PostMapping("/detail")
-    public EnrollmentResponse findEnrollmentByUserIdAndCourseId(@RequestBody @Valid EnrollmentRequest request) {
-        return enrollmentService.findEnrollmentByUserIdAndCourseId(request);
-    }
+//    @PostMapping("/detail")
+//    public EnrollmentResponse findEnrollmentByUserIdAndCourseId(@RequestBody @Valid EnrollmentRequest request) {
+//        return new EnrollmentResponse(enrollmentService.findEnrollmentByUserIdAndCourseId(request));
+//    }
 
     // 유저 id로 수강중인 강좌 목록 생성
     @PostMapping("/list")
@@ -50,9 +54,9 @@ public class EnrollmentController {
     }
 
     // userId, courseId로 조회 후
-    @DeleteMapping("/delete")
-    public EnrollmentResponse deleteEnrollment(@RequestBody @Valid EnrollmentStatusRequest request) {
-        enrollmentService.deleteEnrollment(request);
-        return enrollmentService.updateEnrollmentStatus(request);
-    }
+//    @DeleteMapping("/delete")
+//    public EnrollmentResponse deleteEnrollment(@RequestBody @Valid EnrollmentStatusRequest request) {
+//        enrollmentService.deleteEnrollment(request);
+//        return enrollmentService.updateEnrollmentStatus(request);
+//    }
 }

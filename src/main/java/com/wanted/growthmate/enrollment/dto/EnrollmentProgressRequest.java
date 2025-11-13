@@ -2,36 +2,27 @@ package com.wanted.growthmate.enrollment.dto;
 
 import com.wanted.growthmate.enrollment.entity.Progress;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public class EnrollmentProgressRequest {
 
-    @NotNull(message = "userId 값이 비어있습니다.")
-    private Long userId;
-    @NotNull(message = "courseId 값이 비어있습니다.")
-    private Long courseId;
+    @NotNull(message = "enrollmentId 값이 비어있습니다.")
+    @Positive(message = "Id는 0보다 커야 합니다.")
+    private Long enrollmentId;
     @NotNull(message = "진행률 값이 비어있습니다.")
     private Progress progress;
 
-    public EnrollmentProgressRequest(Long userId, Long courseId, Progress progress) {
-        this.userId = userId;
-        this.courseId = courseId;
+    public EnrollmentProgressRequest(Long enrollmentId, Progress progress) {
+        this.enrollmentId = enrollmentId;
         this.progress = progress;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getEnrollmentId() {
+        return enrollmentId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
+    public void setEnrollmentId(Long enrollmentId) {
+        this.enrollmentId = enrollmentId;
     }
 
     public Progress getProgress() {

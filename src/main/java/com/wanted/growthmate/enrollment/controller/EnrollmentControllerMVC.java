@@ -1,5 +1,6 @@
 package com.wanted.growthmate.enrollment.controller;
 
+import com.wanted.growthmate.enrollment.dto.EnrollmentChangeOrderRequest;
 import com.wanted.growthmate.enrollment.dto.EnrollmentSearchRequest;
 import com.wanted.growthmate.enrollment.dto.EnrollmentStatusRequest;
 import com.wanted.growthmate.enrollment.entity.Enrollment;
@@ -17,15 +18,19 @@ import java.util.List;
 @Controller
 public class EnrollmentControllerMVC {
 
-    @Autowired
     private EnrollmentService enrollmentService;
+
+    @Autowired
+    public EnrollmentControllerMVC(EnrollmentService enrollmentService) {
+        this.enrollmentService = enrollmentService;
+    }
 
     @GetMapping("/myc")
     public String myCourses(Model model) {
         Long userId = 1L;
         Status status = Status.ACTIVE;
-        EnrollmentSearchRequest enrollmentSearchRequest = new EnrollmentSearchRequest(userId,status);
-        List<Enrollment> enrollments = enrollmentService.findEnrollmentByUserId(enrollmentSearchRequest);
+        List<Enrollment> enrollments = enrollmentService.findEnrollmentByUserId(
+                new EnrollmentSearchRequest(userId, status));
 
         model.addAttribute("userId", userId);
         model.addAttribute("enrollments",enrollments);
@@ -34,27 +39,23 @@ public class EnrollmentControllerMVC {
 
     @GetMapping("/edit")
     public String editEnrollment(Model model) {
-
         Long userId = 1L;
-        EnrollmentSearchRequest enrollmentSearchRequest = new EnrollmentSearchRequest(userId,Status.ACTIVE);
-        List<Enrollment> enrollments = enrollmentService.findEnrollmentByUserId(enrollmentSearchRequest);
+        Status status = Status.ACTIVE;
+        List<Enrollment> enrollments = enrollmentService.findEnrollmentByUserId(
+                new EnrollmentSearchRequest(userId,status));
         model.addAttribute("enrollments",enrollments);
         return "editt";
     }
 
     @PostMapping("/change-order")
     public String changeOrder(@RequestParam Long enrollmentId, @RequestParam Long newOrderNum) {
-        Long userId = 1L;       // test
-
-        enrollmentService.changeOrder(userId, enrollmentId, newOrderNum);
-
+        enrollmentService.changeOrder(new EnrollmentChangeOrderRequest(enrollmentId, newOrderNum));
         return "redirect:/edit";
     }
 
     @PostMapping("/hide")
     public String hideEnrollment(@RequestParam Long enrollmentId) {
-        Long userId = 1L;
-        enrollmentService.updateEnrollmentStatus1(userId, enrollmentId, Status.HIDDEN);
+        enrollmentService.updateEnrollmentStatus(new EnrollmentStatusRequest(enrollmentId, Status.HIDDEN));
         return "redirect:/edit";
     }
 
@@ -71,8 +72,13 @@ public class EnrollmentControllerMVC {
 
     @PostMapping("/restore")
     public String restoreEnrollment(@RequestParam Long enrollmentId) {
-        Long userId = 1L;
-        enrollmentService.updateEnrollmentStatus1(userId, enrollmentId, Status.ACTIVE);
+        enrollmentService.updateEnrollmentStatus(new EnrollmentStatusRequest(enrollmentId, Status.ACTIVE));
+        return "redirect:/edit";
+    }
+
+    @PostMapping("/refund")
+    public String refundEnrollment(@RequestParam Long enrollmentId) {
+        enrollmentService.updateEnrollmentStatus(new EnrollmentStatusRequest(enrollmentId, Status.REFUNDED));
         return "redirect:/edit";
     }
 }
