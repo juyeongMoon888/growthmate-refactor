@@ -155,40 +155,4 @@ public class EnrollmentService {
         // 마지막에 대상 강좌 순서 업데이트
         target.setOrderNum(request.getNewOrderNum());
     }
-
-    // userId, enrollmentId, Status
-//    @Transactional
-//    public EnrollmentResponse updateEnrollmentStatus1(Long userId, Long enrollmentId, Status status) {
-//        Enrollment enrollment = enrollmentRepository.findById(
-//                        enrollmentId)
-//                .orElseThrow(() -> new IllegalArgumentException("수강 정보가 없습니다."));
-//
-//        // status를 Refunded로 변경할 때, progress 확인 진행률이 true인 경우 변경 불가
-//        if (status == Status.REFUNDED) {
-//            if (enrollment.getProgress() != Progress.NOT_DONE) {
-//                throw new IllegalStateException("수강 진행 중에는 환불이 불가합니다.");
-//            }
-//            enrollment.setDeletedAt(LocalDateTime.now());
-//        }
-//
-//        enrollment.setStatus(status);
-//
-//        if (status != Status.ACTIVE) {
-//            List<Enrollment> affectedList = enrollmentRepository.findEnrollmentsByUserIdAndStatusOrderByOrderNumAsc(userId, Status.ACTIVE);
-//            for (Enrollment e : affectedList) {
-//                if (e.getOrderNum() > enrollment.getOrderNum()) {
-//                    e.setOrderNum(e.getOrderNum() - 1);
-//                }
-//            }
-//            enrollment.setOrderNum(null);
-//        } else if (status == Status.ACTIVE){
-//            Enrollment lastEnrollment = enrollmentRepository.findTopByUserIdOrderByOrderNumDesc(userId);
-//            Long newOrderNum = (lastEnrollment != null) ? lastEnrollment.getOrderNum() + 1 : 1;
-//            enrollment.setStatus(Status.ACTIVE);
-//            enrollment.setOrderNum(newOrderNum);
-//        }
-//
-//        Enrollment updatedEnrollment = enrollmentRepository.save(enrollment);
-//        return new EnrollmentResponse(updatedEnrollment);
-//    }
 }
