@@ -28,7 +28,7 @@ public class Enrollment {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "enrollment_status", nullable = false)
-    private Status status = Status.ACTIVE;
+    private Status status;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created_at", nullable = false)
@@ -39,7 +39,7 @@ public class Enrollment {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "progress", nullable = false)
-    private Progress progress = Progress.NOT_DONE;
+    private Progress progress;
 
     protected Enrollment() {}
 
@@ -64,37 +64,17 @@ public class Enrollment {
 
     public Long getId() { return id; }
 
-    public User getUser() {
-        return user;
-    }
+    public User getUser() { return user; }
 
-    public Course getCourse() {
-        return course;
-    }
+    public Course getCourse() { return course; }
 
-    public Status getStatus() {
-        return status;
-    }
+    public Status getStatus() { return status; }
 
     public void setStatus(Status status) {
         this.status = status;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
-    }
+    public void setDeletedAt(LocalDateTime deletedAt) { this.deletedAt = deletedAt; }
 
     public Progress getProgress() { return progress; }
 
