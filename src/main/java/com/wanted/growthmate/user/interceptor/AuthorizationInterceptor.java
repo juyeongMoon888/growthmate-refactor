@@ -32,7 +32,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(false);
         Role userRole = (Role)  session.getAttribute("loginUserRole");
         //어드민이 추가되면 어드민이 강사의 권한도 가지게 되면 수정
-        if(userRole == requiredRole || userRole == Role.ROLE_ADMIN) {
+        if(userRole == requiredRole || userRole == Role.ADMIN) {
 
             return true;
         }

@@ -3,9 +3,17 @@ package com.wanted.growthmate.user.entity;
 
 import com.wanted.growthmate.user.role.Role;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
+
+@Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
@@ -25,8 +33,14 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(name = "created_At")
+    @Column(name = "created_at")
     private LocalDateTime createdTime;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedTime;
+
+    @Column(name = "deleted_at")
+    private  LocalDateTime deletedTime;
 
     public User(String username, String email, String password, Role role, LocalDateTime createdTime) {
         this.username = username;
@@ -36,14 +50,9 @@ public class User {
         this.createdTime = createdTime;
     }
 
-    public User() {}
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -92,9 +101,18 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
                 ", createTime=" + createdTime +
                 '}';
+    }
+    public void updateEmail(String email) {
+        if (email != null && !email.isBlank()) {
+            this.email = email;
+        }
+    }
+
+    // 💡 [추가] 비밀번호 변경용 헬퍼 메소드
+    public void updatePassword(String newEncodedPassword) {
+        this.password = newEncodedPassword;
     }
 }
