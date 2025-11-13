@@ -5,6 +5,7 @@ import com.wanted.growthmate.learning.course.domain.dto.CourseCreateRequest;
 import com.wanted.growthmate.learning.course.domain.dto.CourseDetailResponse;
 import com.wanted.growthmate.learning.course.domain.dto.CourseEditRequest;
 import com.wanted.growthmate.learning.course.domain.dto.InstructorCourseSummaryResponse;
+import com.wanted.growthmate.learning.course.domain.model.CourseState;
 import com.wanted.growthmate.learning.course.service.CourseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,6 +44,7 @@ public class CourseController {
     @PostMapping("/instructor/courses")
     public String createInstructorCourse(@ModelAttribute("form") CourseCreateRequest request) {
         courseService.createCourse(
+                CourseState.DRAFT.name(),
                 1L,
                 request.getCategoryId(),
                 request.getTitle(),
