@@ -14,24 +14,13 @@ import org.hibernate.annotations.Comment;
 @Getter
 public abstract class PointTransaction extends BaseTimeEntity {
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@Column(name = "point_transaction_id")
-    //@Comment("포인트 거래 고유 ID")
-    //private Long id;
-
-    // TODO: Point랑 User 중 어디랑 연결되는가? 둘 다? Point랑만 연결되면 User는 간접적으로 알 수 있지 않나??
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "user_id", nullable = false)
-    //@Comment("사용자 ID")
-    //private User user;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "point_id", nullable = false)
     @Comment("포인트")
     private Point point; // 어느 원장의 거래인지
 
     // FIXME: Enrollment랑 직접 연결하지 않고, EnrollmentTransaction 통해서 연결
+    // -> 다음 PR에서 다시 고려하겠습니다.
     //@ManyToOne(fetch = FetchType.LAZY)
     //@JoinColumn(name = "enrollment_id", nullable = true)
     //@Comment("수강 ID")

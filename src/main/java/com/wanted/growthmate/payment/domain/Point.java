@@ -12,11 +12,7 @@ import org.hibernate.annotations.Comment;
 @Table(name = "points")
 @Comment("원장 - 사용자별 현재 포인트 보유량")
 public class Point extends BaseTimeEntity {
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@Column(name = "point_id")
-    //private Long id;
-
+    
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
