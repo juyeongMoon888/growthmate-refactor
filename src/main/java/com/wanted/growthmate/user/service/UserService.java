@@ -49,7 +49,7 @@ public class UserService {
         User user = User.builder()
                 .username(requestDto.getUsername())
                 .password(encoder.encode(requestDto.getPassword())) // 암호화
-                .role(Role.STUDENT) //
+                .role(requestDto.getRole()) //
                 .createdAt(LocalDateTime.now())
                 .build();
 
