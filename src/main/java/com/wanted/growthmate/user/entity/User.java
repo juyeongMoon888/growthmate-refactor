@@ -3,6 +3,7 @@ package com.wanted.growthmate.user.entity;
 
 import com.wanted.growthmate.user.role.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -21,33 +22,41 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+
     @Column(unique = true)
     private String username;
+
 
     @Column(unique = true)
     private String email;
 
+
     @Column
     private String password;
+
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
+
     @Column(name = "created_at")
-    private LocalDateTime createdTime;
+    private LocalDateTime createdAt;
+
 
     @Column(name = "updated_at")
-    private LocalDateTime updatedTime;
+    private LocalDateTime updatedAt;
+
 
     @Column(name = "deleted_at")
-    private  LocalDateTime deletedTime;
+    private  LocalDateTime deletedAt;
 
     public User(String username, String email, String password, Role role, LocalDateTime createdTime) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.createdTime = createdTime;
+        this.createdAt = LocalDateTime.now();
+
     }
 
 
@@ -88,11 +97,11 @@ public class User {
     }
 
     public LocalDateTime getCreatedTime() {
-        return createdTime;
+        return createdAt;
     }
 
     public void setCreatedTime(LocalDateTime createdTime) {
-        this.createdTime = createdTime;
+        this.createdAt = createdTime;
     }
 
     @Override
@@ -102,7 +111,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
-                ", createTime=" + createdTime +
+                ", createTime=" + createdAt +
                 '}';
     }
     public void updateEmail(String email) {

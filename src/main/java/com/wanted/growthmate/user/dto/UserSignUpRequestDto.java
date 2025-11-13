@@ -1,9 +1,7 @@
 package com.wanted.growthmate.user.dto;
 
-import com.wanted.growthmate.user.role.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
