@@ -87,7 +87,7 @@ public class EnrollmentControllerMVC {
             throw new IllegalArgumentException("복구에 문제 발생");
         }
         enrollmentService.updateEnrollmentStatus(enrollmentId, Status.ACTIVE);
-        return "redirect:/enrollment/hidden";
+        return "redirect:/enrollment/hiddenList";
     }
 
     @PostMapping("/refund")
