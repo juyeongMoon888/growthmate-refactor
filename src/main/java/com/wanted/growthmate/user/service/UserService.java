@@ -50,7 +50,7 @@ public class UserService {
                 .username(requestDto.getUsername())
                 .password(encoder.encode(requestDto.getPassword())) // 암호화
                 .role(Role.STUDENT) //
-                .createdTime(LocalDateTime.now())
+                .createdAt(LocalDateTime.now())
                 .build();
 
         User signUp = userRepository.save(user); //user엔티티를 받음

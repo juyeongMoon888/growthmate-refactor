@@ -29,10 +29,6 @@ public class WebConfiguration implements WebMvcConfigurer {
                         "/api/signup",   // 3. 회원가입 페이지 (signup.html)
                         "/api/users/login",
                         "/api/users/signup",
-                        // ❗️ 아래는 CSS/JS 같은 정적 파일용 (권장)
-                        "/css/**",
-                        "/js/**",
-                        "/images/**",
 
                         "/api/users/login",
                         "/api/users/signup");

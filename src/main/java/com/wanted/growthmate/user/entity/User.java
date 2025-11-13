@@ -50,7 +50,7 @@ public class User {
     @Column(name = "deleted_at")
     private  LocalDateTime deletedAt;
 
-    public User(String username, String email, String password, Role role, LocalDateTime createdTime) {
+    public User(String username, String email, String password, Role role, LocalDateTime createdAt) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -96,13 +96,11 @@ public class User {
         this.role = role;
     }
 
-    public LocalDateTime getCreatedTime() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedTime(LocalDateTime createdTime) {
-        this.createdAt = createdTime;
-    }
+
 
     @Override
     public String toString() {
@@ -111,7 +109,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
-                ", createTime=" + createdAt +
+                ", createdAt=" + createdAt +
                 '}';
     }
     public void updateEmail(String email) {
@@ -124,4 +122,6 @@ public class User {
     public void updatePassword(String newEncodedPassword) {
         this.password = newEncodedPassword;
     }
+
+
 }

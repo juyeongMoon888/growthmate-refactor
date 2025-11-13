@@ -13,7 +13,7 @@ public class UserResponseDto {
     private final String username;
     private final String email;
     private final Role role;
-    private final LocalDateTime createdTime;
+    private final LocalDateTime createdAt;
 
     //  User 엔티티를 DTO로 변환 비밀번호는 제외
     public UserResponseDto(User user) {
@@ -21,6 +21,6 @@ public class UserResponseDto {
         this.username = user.getUsername();
         this.email = user.getEmail();
         this.role = user.getRole();
-        this.createdTime = user.getCreatedTime();
+        this.createdAt = user.getCreatedAt();
     }
 }
