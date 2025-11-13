@@ -1,6 +1,11 @@
 package com.wanted.growthmate.payment.service;
 
+import com.wanted.growthmate.enrollment.entity.Enrollment;
+import com.wanted.growthmate.payment.domain.EnrollmentTransaction;
 import com.wanted.growthmate.payment.domain.Point;
+import com.wanted.growthmate.payment.exception.InsufficientPointBalanceException;
+import com.wanted.growthmate.payment.exception.PointNotFoundException;
+import com.wanted.growthmate.payment.repository.EnrollmentTransactionRepository;
 import com.wanted.growthmate.payment.repository.PointRepository;
 import com.wanted.growthmate.user.entity.User;
 import com.wanted.growthmate.user.repository.UserRepository;
@@ -10,16 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-// TODO: 예외 처리 & 트랜잭션
 @Service
 @RequiredArgsConstructor
 public class PointServiceImpl implements PointService {
 
     private final UserRepository userRepository;
     private final PointRepository pointRepository;
+    private final EnrollmentTransactionRepository enrollmentTransactionRepository;
 
     /*
-     * 로그인한 사용자의 현재 포인트 조회
+     * 로그인한 사용자의 현재 포인트 조회 (for 유저 도메인)
      */
     @Transactional
     public Point getOrCreatePoint(Long userId) {
@@ -44,9 +49,46 @@ public class PointServiceImpl implements PointService {
         return pointRepository.save(newPoint);
     }
 
-    // TODO: 사용자가 수강신청 시 포인트 차감
-    //PointTransaction deductPointForEnrollment(Long userId, Long enrollmentId, int amount);
+      /*
+     * 수강신청 시 학생 포인트 차감 & 강사 포인트 적립 (for 수강 도메인)
+     */
+    @Transactional
+    public void transferEnrollmentPoints(Enrollment enrollment) {
+        Long studentId = enrollment.getUser().getId();
+        Long instructorId = enrollment.getCourse().getUserId();
+        int coursePrice = enrollment.getCourse().getPointAmount().intValue();
 
-    // TODO: 사용자가 수강신청 시 포인트 적립 (강사 포인트)
-    //PointTransaction addPointForEnrollmentInstructor(Long instructorId, Long enrollmentId, int amount);
+        // 1. 학생/강사 Point 원장 조회
+        Point studentPoint = pointRepository.findByUserId(studentId)
+                .orElseThrow(() -> new PointNotFoundException(studentId));
+
+        Point instructorPoint = pointRepository.findByUserId(instructorId)
+                .orElseThrow(() -> new PointNotFoundException(instructorId));
+
+        // 2. 학생 포인트 잔액 검증
+        if (studentPoint.getBalance() < coursePrice) {
+            throw new InsufficientPointBalanceException(studentId, coursePrice);
+        }
+
+        // 3. 포인트 거래 엔티티 생성
+        EnrollmentTransaction studentEnrollmentTx = EnrollmentTransaction.createForStudent(
+                enrollment,
+                studentPoint,
+                -coursePrice
+        );
+
+        EnrollmentTransaction instructorEnrollmentTx = EnrollmentTransaction.createForInstructor(
+                enrollment,
+                instructorPoint,
+                coursePrice
+        );
+
+        // 4. 각 거래 저장
+        enrollmentTransactionRepository.save(studentEnrollmentTx);
+        enrollmentTransactionRepository.save(instructorEnrollmentTx);
+
+        // 5. 원장 잔액 업데이트
+        studentPoint.subtractBalance(coursePrice);
+        instructorPoint.addBalance(coursePrice);
+    }
 }
