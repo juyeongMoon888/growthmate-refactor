@@ -43,6 +43,7 @@ public class CourseController {
 
     @PostMapping("/instructor/courses")
     public String createInstructorCourse(@ModelAttribute("form") CourseCreateRequest request) {
+        System.out.println("### DEBUG categoryId = " + request.getCategoryId());
         courseService.createCourse(
                 CourseState.DRAFT.name(),
                 1L,
@@ -63,7 +64,7 @@ public class CourseController {
 
         List<CategoryResponse> categories = courseService.getAllCategories();
         model.addAttribute("categories", categories);
-        return "course-new";
+        return "course/course-new";
     }
 
     //이전 값 미리 채우기
@@ -72,6 +73,6 @@ public class CourseController {
         //수정 폼DTO를 받아야함.
         CourseEditRequest courseEditForm = courseService.getCourseEditForm(id);
         model.addAttribute("form", courseEditForm);
-        return "course-new";
+        return "course/course-new";
     }
 }

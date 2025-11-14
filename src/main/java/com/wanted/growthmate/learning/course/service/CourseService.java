@@ -11,6 +11,7 @@ import com.wanted.growthmate.learning.course.domain.entity.Course;
 import com.wanted.growthmate.learning.course.domain.dto.CourseDetailResponse;
 import com.wanted.growthmate.learning.course.domain.model.CourseEdit;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -61,11 +62,16 @@ public class CourseService {
         return CourseDetailResponse.from(course);
     }
 
+    @Transactional
     public void deleteCourse(Long courseId) {
         Course findCourse = courseRepository.findById(courseId)
                 .orElseThrow(() -> new CourseNotFound("Course not found with id: " + courseId));
         findCourse.markDeleted();
+
+        System.out.println(findCourse);
     }
+
+
 
     public List<CategoryResponse> getAllCategories() {
         return categoryRepository.findAll().stream()
