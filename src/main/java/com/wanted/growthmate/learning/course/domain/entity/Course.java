@@ -1,7 +1,5 @@
 package com.wanted.growthmate.learning.course.domain.entity;
 
-import com.wanted.growthmate.common.entity.BaseEntity;
-import com.wanted.growthmate.common.entity.BaseTimeEntity;
 import com.wanted.growthmate.common.entity.SoftDeleteBaseEntity;
 import com.wanted.growthmate.learning.course.domain.model.CourseEdit;
 import com.wanted.growthmate.learning.course.domain.model.CourseState;
@@ -9,8 +7,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Builder
@@ -43,7 +39,16 @@ public class Course extends SoftDeleteBaseEntity {
 
     public Course() {}
 
+    // 발행전이면 수정할 수 없다.
+    private void verifyNotPublished() {
+        if (courseState == CourseState.PUBLISHED) {
+            throw new IllegalStateException("이미 발행된 강좌는 수정할 수 없습니다. ");
+        }
+    }
+
+    // 강좌를 수정한다.
     public void editCourse(CourseEdit courseEdit) {
+        verifyNotPublished();
         if (courseEdit.getTitle() != null) {
             this.title = courseEdit.getTitle();
         }
