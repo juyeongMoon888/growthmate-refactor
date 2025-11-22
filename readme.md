@@ -47,3 +47,6 @@ Layered Architecture 기반의 MVC 설계 패턴 실습.
 ## 🔗 Reference
 - 🧭 **Notion:** [프로젝트 문서 페이지](https://www.notion.so/ohgiraffers/F5-2a1649136c11801fadb0f99b62f5ebb5?source=copy_link)
 - 🎨 **Figma:** [Service Design & Modeling](https://www.figma.com/board/pfid0izluDLfEUyBsMHLNl/FigJam-basics?node-id=2862-39&t=99R4zqsKHKCEVvIR-1)
+
+## Refactoring
+-🪏포크 출처: https://github.com/F4andJandi/growthmate 
