@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-@AllArgsConstructor //new Course가 완전히 없어지면 없애도됨
+@AllArgsConstructor
 @Entity
 @Table(name = "course")
 public class Course extends SoftDeleteBaseEntity {
@@ -24,8 +24,11 @@ public class Course extends SoftDeleteBaseEntity {
     @Column(nullable = false)
     private String description;
 
+    /**
+     * 강사 ID
+     */
     @Column(name = "user_id", nullable = false)
-    private Long userId; // 강사ID
+    private Long userId;
 
     @Column(name = "point_amount", nullable = false)
     private Long pointAmount;
@@ -39,14 +42,12 @@ public class Course extends SoftDeleteBaseEntity {
 
     public Course() {}
 
-    // 발행전이면 수정할 수 없다.
     private void verifyNotPublished() {
         if (courseState == CourseState.PUBLISHED) {
-            throw new IllegalStateException("이미 발행된 강좌는 수정할 수 없습니다. ");
+            throw new IllegalStateException("이미 발행된 강좌는 수정할 수 없습니다.");
         }
     }
 
-    // 강좌를 수정한다.
     public void editCourse(CourseEdit courseEdit) {
         verifyNotPublished();
         if (courseEdit.getTitle() != null) {
