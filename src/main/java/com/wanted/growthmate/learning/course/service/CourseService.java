@@ -52,7 +52,7 @@ public class CourseService {
                 .toList();
     }
 
-    public CourseDetailResponse update(Long courseId, CourseEdit courseEdit) {
+    public CourseDetailResponse updateInstructorDraftCourse(Long courseId, CourseEdit courseEdit) {
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new CourseNotFound("Course not found with id: " + courseId));
 
@@ -71,21 +71,19 @@ public class CourseService {
         System.out.println(findCourse);
     }
 
-
-
     public List<CategoryResponse> getAllCategories() {
         return categoryRepository.findAll().stream()
                 .map(CategoryResponse::from)
                 .toList();
     }
 
-    public List<InstructorCourseSummaryResponse> getInstructorCourses() {
+    public List<InstructorCourseSummaryResponse> getInstructorDraftCourses() {
         return courseRepository.findAll().stream()
                 .map(InstructorCourseSummaryResponse::from)
                 .toList();
     }
 
-    public CourseEditRequest getCourseEditForm(Long courseId) {
+    public CourseEditRequest getInstructorDraftCourseEditForm(Long courseId) {
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new CourseNotFound("Course not found with id: " + courseId));
         return CourseEditRequest.from(course);

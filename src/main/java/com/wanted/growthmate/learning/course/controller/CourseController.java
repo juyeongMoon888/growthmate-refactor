@@ -36,7 +36,7 @@ public class CourseController {
 
     @GetMapping("/instructor/courses")
     public String instructorCourses(Model model) {
-        List<InstructorCourseSummaryResponse> instructorCourses = courseService.getInstructorCourses();
+        List<InstructorCourseSummaryResponse> instructorCourses = courseService.getInstructorDraftCourses();
         model.addAttribute("courses", instructorCourses);
         return "instructor-course-list";
     }
@@ -71,7 +71,7 @@ public class CourseController {
     @GetMapping("/instructor/courses/{id}/edit")
     public String editCourseForm(@PathVariable Long id, Model model) {
         //수정 폼DTO를 받아야함.
-        CourseEditRequest courseEditForm = courseService.getCourseEditForm(id);
+        CourseEditRequest courseEditForm = courseService.getInstructorDraftCourseEditForm(id);
         model.addAttribute("form", courseEditForm);
         return "course/course-new";
     }

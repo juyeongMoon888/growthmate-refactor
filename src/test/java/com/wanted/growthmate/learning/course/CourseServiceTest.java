@@ -12,7 +12,6 @@ import com.wanted.growthmate.learning.course.service.CourseService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -114,7 +113,7 @@ class CourseServiceTest {
                 .pointAmount(200L)// 200P
                 .build();
 
-        CourseDetailResponse updatedCourse = courseService.update(1L, courseEdit);
+        CourseDetailResponse updatedCourse = courseService.updateInstructorDraftCourse(1L, courseEdit);
         org.junit.jupiter.api.Assertions.assertEquals(updatedCourse.getTitle(), "강좌 수정");
     }
 
