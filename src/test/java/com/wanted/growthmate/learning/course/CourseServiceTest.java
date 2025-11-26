@@ -31,7 +31,7 @@ class CourseServiceTest {
     @Test
     void 강좌_생성() throws Exception {
         CourseCreateRequest dto = CourseCreateRequest.builder()
-                .userId(1L)// 강사ID
+                .instructorId(1L)// 강사ID
                 .categoryId(1L)
                 .title("강좌 제목")
                 .description("강좌 설명")
@@ -40,14 +40,14 @@ class CourseServiceTest {
                 .build();
 
         CourseDetailResponse savedCourse = courseService.createCourse(CourseState.DRAFT.name()
-                , dto.getUserId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
+                , dto.getInstructorId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
         assertThat(savedCourse.getTitle()).isEqualTo("강좌 제목");
     }
 
     @Test
     void 강좌_단일_조회() throws Exception {
         CourseCreateRequest dto = CourseCreateRequest.builder()
-                .userId(1L)// 강사ID
+                .instructorId(1L)// 강사ID
                 .categoryId(1L)
                 .title("강좌 제목")
                 .description("강좌 설명")
@@ -55,7 +55,7 @@ class CourseServiceTest {
                 .pointAmount(200L)// 200P
                 .build();
 
-        courseService.createCourse(CourseState.DRAFT.name(), dto.getUserId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
+        courseService.createCourse(CourseState.DRAFT.name(), dto.getInstructorId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
 
         Optional<Course> findCourse = courseService.getCourse(1L);
         assertThat(findCourse).isPresent();
@@ -67,7 +67,7 @@ class CourseServiceTest {
     @Test
     void 강좌_리스트_조회() throws Exception {
         CourseCreateRequest dto1 = CourseCreateRequest.builder()
-                .userId(1L)// 강사ID
+                .instructorId(1L)// 강사ID
                 .categoryId(1L)
                 .title("강좌 제목")
                 .description("강좌 설명")
@@ -75,10 +75,10 @@ class CourseServiceTest {
                 .pointAmount(200L)// 200P
                 .build();
 
-        courseService.createCourse(CourseState.DRAFT.name(), dto1.getUserId(), dto1.getCategoryId(), dto1.getTitle(), dto1.getDescription(), dto1.getImageUrl(), dto1.getPointAmount());
+        courseService.createCourse(CourseState.DRAFT.name(), dto1.getInstructorId(), dto1.getCategoryId(), dto1.getTitle(), dto1.getDescription(), dto1.getImageUrl(), dto1.getPointAmount());
 
         CourseCreateRequest dto2 = CourseCreateRequest.builder()
-                .userId(1L)// 강사ID
+                .instructorId(1L)// 강사ID
                 .categoryId(1L)
                 .title("강좌 제목2")
                 .description("강좌 설명2")
@@ -86,7 +86,7 @@ class CourseServiceTest {
                 .pointAmount(200L)// 200P
                 .build();
 
-        courseService.createCourse(CourseState.DRAFT.name(), dto2.getUserId(), dto2.getCategoryId(), dto2.getTitle(), dto2.getDescription(), dto2.getImageUrl(), dto2.getPointAmount());
+        courseService.createCourse(CourseState.DRAFT.name(), dto2.getInstructorId(), dto2.getCategoryId(), dto2.getTitle(), dto2.getDescription(), dto2.getImageUrl(), dto2.getPointAmount());
 
         List<CourseDetailResponse> savedCourses = courseService.getCourses();
         assertThat(savedCourses).isNotEmpty();
@@ -96,7 +96,7 @@ class CourseServiceTest {
     @Test
     void 강좌_수정() throws Exception {
         CourseCreateRequest dto = CourseCreateRequest.builder()
-                .userId(1L)// 강사ID
+                .instructorId(1L)// 강사ID
                 .categoryId(1L)
                 .title("강좌 제목")
                 .description("강좌 설명")
@@ -104,7 +104,7 @@ class CourseServiceTest {
                 .pointAmount(200L)// 200P
                 .build();
 
-        courseService.createCourse(CourseState.DRAFT.name(), dto.getUserId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
+        courseService.createCourse(CourseState.DRAFT.name(), dto.getInstructorId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
 
         CourseEdit courseEdit = CourseEdit.builder()
                 .title("강좌 수정")
@@ -120,14 +120,14 @@ class CourseServiceTest {
     @Test
     void 강좌_삭제() throws Exception {
         CourseCreateRequest dto = CourseCreateRequest.builder()
-                .userId(1L)// 강사ID
+                .instructorId(1L)// 강사ID
                 .categoryId(1L)
                 .title("강좌 제목")
                 .description("강좌 설명")
                 .imageUrl("이미지url")
                 .pointAmount(200L)// 200P
                 .build();
-        CourseDetailResponse course = courseService.createCourse(CourseState.DRAFT.name(), dto.getUserId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
+        CourseDetailResponse course = courseService.createCourse(CourseState.DRAFT.name(), dto.getInstructorId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
 
         courseService.deleteCourse(course.getId());
 
