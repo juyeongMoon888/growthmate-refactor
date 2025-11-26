@@ -24,9 +24,6 @@ public class Course extends SoftDeleteBaseEntity {
     @Column(nullable = false)
     private String description;
 
-    /**
-     * 강사 ID userId -> instructorId
-     */
     @Column(name = "instructor_id", nullable = false)
     private Long instructorId;
 

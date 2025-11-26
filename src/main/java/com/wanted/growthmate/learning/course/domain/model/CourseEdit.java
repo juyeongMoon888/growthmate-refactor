@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class CourseEdit {
-    private String title; //변경이 없다면 기존과 같은값
+    private String title;
     private String description;
     private Long pointAmount;
     private String imageUrl;

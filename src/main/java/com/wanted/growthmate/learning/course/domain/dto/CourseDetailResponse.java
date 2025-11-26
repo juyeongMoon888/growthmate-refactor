@@ -7,7 +7,7 @@ import lombok.Getter;
 public class CourseDetailResponse {
     private String title;
     private String description;
-    private Long instructorId; // 강사ID
+    private Long instructorId;
     private Long pointAmount;
     private String imageUrl;
     private Long id;
