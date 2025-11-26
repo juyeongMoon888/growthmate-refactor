@@ -29,7 +29,7 @@ public class CourseService {
 
     public CourseDetailResponse createCourse(String action, Long instructorId, Long courseCategoryId, String courseTitle, String courseDescription, String courseImageUrl, Long coursePointAmount) {
         Course newCourse = Course.builder()
-                .userId(instructorId)
+                .instructorId(instructorId)
                 .categoryId(courseCategoryId)
                 .title(courseTitle)
                 .description(courseDescription)

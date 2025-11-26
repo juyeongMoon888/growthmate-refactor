@@ -25,10 +25,10 @@ public class Course extends SoftDeleteBaseEntity {
     private String description;
 
     /**
-     * 강사 ID
+     * 강사 ID userId -> instructorId
      */
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+    @Column(name = "instructor_id", nullable = false)
+    private Long instructorId;
 
     @Column(name = "point_amount", nullable = false)
     private Long pointAmount;

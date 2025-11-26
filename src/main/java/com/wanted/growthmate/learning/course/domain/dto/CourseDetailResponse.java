@@ -7,7 +7,7 @@ import lombok.Getter;
 public class CourseDetailResponse {
     private String title;
     private String description;
-    private Long userId; // 강사ID
+    private Long instructorId; // 강사ID
     private Long pointAmount;
     private String imageUrl;
     private Long id;
@@ -16,7 +16,7 @@ public class CourseDetailResponse {
     public CourseDetailResponse(Course course) {
         this.title = course.getTitle();
         this.description = course.getDescription();
-        this.userId = course.getUserId();
+        this.instructorId = course.getInstructorId();
         this.pointAmount = course.getPointAmount();
         this.imageUrl = course.getImageUrl();
         this.id = course.getId();

@@ -10,7 +10,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class CourseEditRequest {
     private Long categoryId;
-    private String title; //변경이 없다면 기존과 같은값
+    private String title;
     private String description;
     private Long pointAmount;
     private String imageUrl;

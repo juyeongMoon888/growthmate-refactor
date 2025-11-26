@@ -6,14 +6,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter // 바인딩 위함
+@Setter
 @Builder
-@AllArgsConstructor // 테스트에서 필요함.
+@AllArgsConstructor
 public class CourseCreateRequest {
     private String title;
     private Long categoryId;
     private String description;
-    private Long userId; // 강사ID
+    private Long instructorId;
     private Long pointAmount;
     private String imageUrl;
 
