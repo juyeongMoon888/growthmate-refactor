@@ -1,6 +1,8 @@
 package com.wanted.growthmate.learning.course;
 
+import com.wanted.growthmate.category.domain.entity.Category;
 import com.wanted.growthmate.category.dto.CategoryResponse;
+import com.wanted.growthmate.category.repository.CategoryRepository;
 import com.wanted.growthmate.learning.course.domain.entity.Course;
 import com.wanted.growthmate.learning.course.domain.dto.CourseCreateRequest;
 import com.wanted.growthmate.learning.course.domain.dto.CourseDetailResponse;
@@ -9,9 +11,11 @@ import com.wanted.growthmate.learning.course.domain.model.CourseState;
 import com.wanted.growthmate.learning.course.exception.CourseNotFound;
 import com.wanted.growthmate.learning.course.repository.CourseRepository;
 import com.wanted.growthmate.learning.course.service.CourseService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +32,18 @@ class CourseServiceTest {
     @Autowired
     CourseRepository courseRepository;
 
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    @BeforeEach
+    void setUp() {
+        categoryRepository.deleteAll();
+        categoryRepository.save(new Category(1, "프로그래밍 관련 강좌", "프로그래밍"));
+        categoryRepository.save(new Category(2, "웹 개발 관련 강좌", "웹 개발"));
+        categoryRepository.save(new Category(3, "데이터베이스 관련 강좌", "데이터베이스"));
+        categoryRepository.save(new Category(4, "디자인 관련 강좌", "디자인"));
+    }
+
     @Test
     void 강좌_생성() throws Exception {
         CourseCreateRequest dto = CourseCreateRequest.builder()
@@ -39,8 +55,7 @@ class CourseServiceTest {
                 .pointAmount(200L)// 200P
                 .build();
 
-        CourseDetailResponse savedCourse = courseService.createCourse(CourseState.DRAFT.name()
-                , dto.getInstructorId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
+        CourseDetailResponse savedCourse = courseService.createCourse(dto.getInstructorId(), dto);
         assertThat(savedCourse.getTitle()).isEqualTo("강좌 제목");
     }
 
@@ -55,13 +70,13 @@ class CourseServiceTest {
                 .pointAmount(200L)// 200P
                 .build();
 
-        courseService.createCourse(CourseState.DRAFT.name(), dto.getInstructorId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
+        CourseDetailResponse course1 = courseService.createCourse(dto.getInstructorId(), dto);
 
-        Optional<Course> findCourse = courseService.getCourse(1L);
+        Optional<Course> findCourse = courseService.getCourse(course1.getId());
         assertThat(findCourse).isPresent();
-        Course course = findCourse.get();
-        assertThat(course.getTitle()).isEqualTo("강좌 제목");
-        assertThat(course.getDescription()).isEqualTo("강좌 설명");
+        Course foundCourse = findCourse.get();
+        assertThat(foundCourse.getTitle()).isEqualTo("강좌 제목");
+        assertThat(foundCourse.getDescription()).isEqualTo("강좌 설명");
     }
 
     @Test
@@ -75,7 +90,9 @@ class CourseServiceTest {
                 .pointAmount(200L)// 200P
                 .build();
 
-        courseService.createCourse(CourseState.DRAFT.name(), dto1.getInstructorId(), dto1.getCategoryId(), dto1.getTitle(), dto1.getDescription(), dto1.getImageUrl(), dto1.getPointAmount());
+        courseService.createCourse(dto1.getInstructorId(), dto1);
+
+
 
         CourseCreateRequest dto2 = CourseCreateRequest.builder()
                 .instructorId(1L)// 강사ID
@@ -86,7 +103,7 @@ class CourseServiceTest {
                 .pointAmount(200L)// 200P
                 .build();
 
-        courseService.createCourse(CourseState.DRAFT.name(), dto2.getInstructorId(), dto2.getCategoryId(), dto2.getTitle(), dto2.getDescription(), dto2.getImageUrl(), dto2.getPointAmount());
+        courseService.createCourse(dto2.getInstructorId(), dto2);
 
         List<CourseDetailResponse> savedCourses = courseService.getCourses();
         assertThat(savedCourses).isNotEmpty();
@@ -104,7 +121,7 @@ class CourseServiceTest {
                 .pointAmount(200L)// 200P
                 .build();
 
-        courseService.createCourse(CourseState.DRAFT.name(), dto.getInstructorId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
+        courseService.createCourse(dto.getInstructorId(), dto);
 
         CourseEdit courseEdit = CourseEdit.builder()
                 .title("강좌 수정")
@@ -127,7 +144,7 @@ class CourseServiceTest {
                 .imageUrl("이미지url")
                 .pointAmount(200L)// 200P
                 .build();
-        CourseDetailResponse course = courseService.createCourse(CourseState.DRAFT.name(), dto.getInstructorId(), dto.getCategoryId(), dto.getTitle(), dto.getDescription(), dto.getImageUrl(), dto.getPointAmount());
+        CourseDetailResponse course = courseService.createCourse(dto.getInstructorId(), dto);
 
         courseService.deleteCourse(course.getId());
 
@@ -140,6 +157,9 @@ class CourseServiceTest {
     void 카테고리_조회() {
         List<CategoryResponse> allCategories = courseService.getAllCategories();
         assertThat(allCategories).isNotEmpty();
+
+        List<Category> all = categoryRepository.findAll();
+        System.out.println("DB에 있는 카테고리 개수 = " + all.size());
 
         assertThat(allCategories)
                 .extracting("categoryName")
