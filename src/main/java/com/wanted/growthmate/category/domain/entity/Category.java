@@ -18,6 +18,10 @@ public class Category {
     @Column(name = "category_order")
     private int categoryOrder;
 
+    public Category() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -32,5 +36,11 @@ public class Category {
 
     public int getCategoryOrder() {
         return categoryOrder;
+    }
+
+    public Category(int categoryOrder, String categoryDescription, String categoryName) {
+        this.categoryOrder = categoryOrder;
+        this.categoryDescription = categoryDescription;
+        this.categoryName = categoryName;
     }
 }
