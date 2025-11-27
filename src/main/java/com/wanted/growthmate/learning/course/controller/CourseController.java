@@ -43,15 +43,10 @@ public class CourseController {
 
     @PostMapping("/instructor/courses")
     public String createInstructorCourse(@ModelAttribute("form") CourseCreateRequest request) {
-        System.out.println("### DEBUG categoryId = " + request.getCategoryId());
+        //강좌 생성에 필요한 재료들을 하나로 싸서 서비스에 넘겨준다.
         courseService.createCourse(
-                CourseState.DRAFT.name(),
                 1L,
-                request.getCategoryId(),
-                request.getTitle(),
-                request.getDescription(),
-                request.getImageUrl(),
-                request.getPointAmount()
+                request
         );
         return "redirect:/instructor/courses";
     }
