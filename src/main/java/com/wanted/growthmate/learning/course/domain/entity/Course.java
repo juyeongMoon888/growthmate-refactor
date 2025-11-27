@@ -9,8 +9,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@Builder
-@AllArgsConstructor
 @Entity
 @Table(name = "course")
 public class Course extends SoftDeleteBaseEntity {
@@ -38,6 +36,17 @@ public class Course extends SoftDeleteBaseEntity {
     private String imageUrl;
 
     public Course() {}
+
+    @Builder
+    public Course(String title, Long categoryId, String description, Long instructorId, Long pointAmount, String imageUrl) {
+        this.title = title;
+        this.categoryId = categoryId;
+        this.description = description;
+        this.instructorId = instructorId;
+        this.pointAmount = pointAmount;
+        this.courseState = CourseState.DRAFT;
+        this.imageUrl = imageUrl;
+    }
 
     private void verifyNotPublished() {
         if (courseState == CourseState.PUBLISHED) {

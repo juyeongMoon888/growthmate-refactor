@@ -2,6 +2,7 @@ package com.wanted.growthmate.learning.course.service;
 
 import com.wanted.growthmate.category.dto.CategoryResponse;
 import com.wanted.growthmate.category.repository.CategoryRepository;
+import com.wanted.growthmate.learning.course.domain.dto.CourseCreateRequest;
 import com.wanted.growthmate.learning.course.domain.dto.CourseEditRequest;
 import com.wanted.growthmate.learning.course.domain.dto.InstructorCourseSummaryResponse;
 import com.wanted.growthmate.learning.course.exception.CourseNotFound;
@@ -27,15 +28,14 @@ public class CourseService {
         this.categoryRepository = categoryRepository;
     }
 
-    public CourseDetailResponse createCourse(String action, Long instructorId, Long courseCategoryId, String courseTitle, String courseDescription, String courseImageUrl, Long coursePointAmount) {
+    public CourseDetailResponse createCourse(Long instructorId, CourseCreateRequest request) {
         Course newCourse = Course.builder()
                 .instructorId(instructorId)
-                .categoryId(courseCategoryId)
-                .title(courseTitle)
-                .description(courseDescription)
-                .pointAmount(coursePointAmount)
-                .courseState(CourseState.valueOf(action))
-                .imageUrl(courseImageUrl)
+                .categoryId(request.getCategoryId())
+                .title(request.getTitle())
+                .description(request.getDescription())
+                .pointAmount(request.getPointAmount())
+                .imageUrl(request.getImageUrl())
                 .build();
 
         courseRepository.save(newCourse);
