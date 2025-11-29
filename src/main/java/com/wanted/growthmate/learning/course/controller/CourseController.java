@@ -5,7 +5,6 @@ import com.wanted.growthmate.learning.course.domain.dto.CourseCreateRequest;
 import com.wanted.growthmate.learning.course.domain.dto.CourseDetailResponse;
 import com.wanted.growthmate.learning.course.domain.dto.CourseEditRequest;
 import com.wanted.growthmate.learning.course.domain.dto.InstructorCourseSummaryResponse;
-import com.wanted.growthmate.learning.course.domain.model.CourseState;
 import com.wanted.growthmate.learning.course.service.CourseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +24,9 @@ public class CourseController {
         this.courseService = courseService;
     }
 
+    /** 수강생이 보는 강좌 목록 **/
     @GetMapping("/courses")
-    public String getCourses(Model model) {
+    public String showCourseListPage(Model model) {
         List<CourseDetailResponse> courses = courseService.getCourses();
         List<CategoryResponse> categories = courseService.getAllCategories();
         model.addAttribute("courses", courses);
@@ -34,27 +34,17 @@ public class CourseController {
         return "course-list";
     }
 
+    /** 강좌 목록 **/
     @GetMapping("/instructor/courses")
-    public String instructorCourses(Model model) {
+    public String showInstructorCoursesPage(Model model) {
         List<InstructorCourseSummaryResponse> instructorCourses = courseService.getInstructorDraftCourses();
         model.addAttribute("courses", instructorCourses);
         return "instructor-course-list";
     }
 
-    @PostMapping("/instructor/courses")
-    public String createInstructorCourse(@ModelAttribute("form") CourseCreateRequest request) {
-        //강좌 생성에 필요한 재료들을 하나로 싸서 서비스에 넘겨준다.
-        courseService.createCourse(
-                1L,
-                request
-        );
-        return "redirect:/instructor/courses";
-    }
-
+    /** 새 강좌 등록 폼 요청 **/
     @GetMapping("/instructor/courses/new")
     public String newInstructorCourse(Model model) {
-        //GET으로 폼을 열 때에도 **폼-백킹 DTO(빈 값)**를 model에 넣어두면 th:object/*{...} 바인딩이 안전하게 동작하고,
-        // 이후 검증 실패 시 메시지 복원(POST-Redirect-GET)도 깔끔해집니다.
         model.addAttribute("form", new CourseCreateRequest());
 
         List<CategoryResponse> categories = courseService.getAllCategories();
@@ -62,10 +52,23 @@ public class CourseController {
         return "course/course-new";
     }
 
-    //이전 값 미리 채우기
+    /** 폼 제출 -> 생성 **/
+    @PostMapping("/instructor/courses")
+    public String createInstructorCourse(@ModelAttribute("form") CourseCreateRequest request) {
+        courseService.createCourse(
+                1L,
+                request
+        );
+        return "redirect:/instructor/courses";
+    }
+
+    /**
+     * 강좌 수정 폼 화면을 보여준다.
+     * 주어진 강좌 ID로 수정용 데이터를 조회해 모델에 담고,
+     * 강좌 수정 템플릿을 반환한다.
+     */
     @GetMapping("/instructor/courses/{id}/edit")
     public String editCourseForm(@PathVariable Long id, Model model) {
-        //수정 폼DTO를 받아야함.
         CourseEditRequest courseEditForm = courseService.getInstructorDraftCourseEditForm(id);
         model.addAttribute("form", courseEditForm);
         return "course/course-new";
