@@ -67,8 +67,6 @@ public class CourseService {
         Course findCourse = courseRepository.findById(courseId)
                 .orElseThrow(() -> new CourseNotFound("Course not found with id: " + courseId));
         findCourse.markDeleted();
-
-        System.out.println(findCourse);
     }
 
     public List<CategoryResponse> getAllCategories() {
