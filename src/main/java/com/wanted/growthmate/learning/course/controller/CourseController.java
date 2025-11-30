@@ -68,8 +68,8 @@ public class CourseController {
      * 강좌 수정 템플릿을 반환한다.
      */
     @GetMapping("/instructor/courses/{id}/edit")
-    public String editCourseForm(@PathVariable Long id, Model model) {
-        CourseEditRequest courseEditForm = courseService.getInstructorDraftCourseEditForm(id);
+    public String editCourseForm(@PathVariable("id") Long courseId, Model model) {
+        CourseEditRequest courseEditForm = courseService.getInstructorDraftCourseEditForm(courseId);
         model.addAttribute("form", courseEditForm);
         return "course/course-new";
     }
