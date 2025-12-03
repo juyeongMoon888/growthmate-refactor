@@ -2,14 +2,11 @@ package com.wanted.growthmate.learning.course.service;
 
 import com.wanted.growthmate.category.dto.CategoryResponse;
 import com.wanted.growthmate.category.repository.CategoryRepository;
-import com.wanted.growthmate.learning.course.domain.dto.CourseCreateRequest;
-import com.wanted.growthmate.learning.course.domain.dto.CourseEditRequest;
-import com.wanted.growthmate.learning.course.domain.dto.InstructorCourseSummaryResponse;
+import com.wanted.growthmate.learning.course.domain.dto.*;
 import com.wanted.growthmate.learning.course.exception.CourseNotFound;
 import com.wanted.growthmate.learning.course.repository.CourseRepository;
 import com.wanted.growthmate.learning.course.domain.model.CourseState;
 import com.wanted.growthmate.learning.course.domain.entity.Course;
-import com.wanted.growthmate.learning.course.domain.dto.CourseDetailResponse;
 import com.wanted.growthmate.learning.course.domain.model.CourseEdit;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +16,6 @@ import java.util.Optional;
 
 @Service
 public class CourseService {
-
     private final CourseRepository courseRepository;
     private final CategoryRepository categoryRepository;
 
@@ -50,6 +46,12 @@ public class CourseService {
         return courseRepository.findAll().stream()
                 .map(CourseDetailResponse::from)
                 .toList();
+    }
+
+    public CourseListWithCategoriesResponse getCourseListView() {
+        List<CourseDetailResponse> courses = getCourses();
+        List<CategoryResponse> categories = getAllCategories();
+        return CourseListWithCategoriesResponse.of(courses, categories);
     }
 
     public CourseDetailResponse updateInstructorDraftCourse(Long courseId, CourseEdit courseEdit) {

@@ -1,10 +1,7 @@
 package com.wanted.growthmate.learning.course.controller;
 
 import com.wanted.growthmate.category.dto.CategoryResponse;
-import com.wanted.growthmate.learning.course.domain.dto.CourseCreateRequest;
-import com.wanted.growthmate.learning.course.domain.dto.CourseDetailResponse;
-import com.wanted.growthmate.learning.course.domain.dto.CourseEditRequest;
-import com.wanted.growthmate.learning.course.domain.dto.InstructorCourseSummaryResponse;
+import com.wanted.growthmate.learning.course.domain.dto.*;
 import com.wanted.growthmate.learning.course.service.CourseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,10 +24,8 @@ public class CourseController {
     /** 수강생이 보는 강좌 목록 **/
     @GetMapping("/courses")
     public String showCourseListPage(Model model) {
-        List<CourseDetailResponse> courses = courseService.getCourses();
-        List<CategoryResponse> categories = courseService.getAllCategories();
-        model.addAttribute("courses", courses);
-        model.addAttribute("categories", categories);
+        CourseListWithCategoriesResponse courseListView = courseService.getCourseListView();
+        model.addAttribute("courseListView", courseListView);
         return "course-list";
     }
 
