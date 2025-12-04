@@ -37,6 +37,11 @@ public class CourseController {
         return "instructor-course-list";
     }
 
+    /** 카테고리 조회 **/
+    @GetMapping("/categories")
+    public String getCategories(Model model) {
+
+    }
     /** 새 강좌 등록 폼 요청 **/
     @GetMapping("/instructor/courses/new")
     public String newInstructorCourse(Model model) {
